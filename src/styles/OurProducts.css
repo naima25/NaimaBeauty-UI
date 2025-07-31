@@ -1,0 +1,69 @@
+/* Push content below fixed navbar */
+.our-products-container {
+  margin-top: 100px; /* Adjust based on your navbar height */
+  padding: 1rem;
+}
+
+/* Categories Header Section */
+.categories-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.categories-header button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #ff4096;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.categories-header button:hover {
+  background-color: #fa00ddf0;
+}
+
+/* Category Buttons Row */
+.category-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.category-button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  background-color: #e0e0e0;
+  color: #333333;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+  border: none;
+}
+
+.category-button:hover {
+  background-color: #fa00ddf0;
+  color: white;
+}
+
+.category-button.active {
+  background-color: #fa00ddf0;
+  color: white;
+}
+
+/* Products Grid */
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+
+
