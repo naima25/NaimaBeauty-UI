@@ -11,7 +11,7 @@ import '../styles/Footer.css'
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>&copy;  {new Date().getFullYear()} Easy Commerce. All rights reserved.</p>
+      <p>&copy;  {new Date().getFullYear()} Naima Beauty. All rights reserved.</p>
     </footer>
   ) 
 } 
