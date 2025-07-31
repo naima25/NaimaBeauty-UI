@@ -4,7 +4,7 @@ import "../styles/AboutUs.css";
 
 /* 
   AboutUs Component:
-  This component is the 'About Us' page for the EasyCommerce platform. It provides information about the company's mission, values, and what sets it apart from other ecommerce platforms. 
+  This component is the 'About Us' page for the ... platform. It provides information about the company's mission, values, and what sets it apart from other ecommerce platforms. 
   The page is structured into three main sections:
     -  Hero Section
    - Our Passion Section
@@ -21,7 +21,7 @@ const AboutUs = () => {
         <section className="hero-section">
           <img
             src="https://thumbs.dreamstime.com/b/asian-business-financial-team-work-together-project-brainstorm-meeting-cooperate-teamwork-strategy-planning-young-small-startup-187442432.jpg?w=2048"
-            alt="EasyCommerce team"
+            alt="NaimaBeauty team"
             className="hero-image"
           />
         </section>
@@ -30,11 +30,7 @@ const AboutUs = () => {
         <section className="mission-section">
           <h2>Our Passion</h2>
           <p>
-          Founded in 2023, EasyCommerce began as a small team of shopping enthusiasts.
-          We've grown into a trusted platform serving thousands of customers daily,
-          while maintaining our commitment to simplicity and customer satisfaction. At EasyCommerce, we're passionate about connecting you with quality products
-          at unbeatable prices. Our curated collections span electronics, fashion,
-          home goods, and more – all with fast shipping and easy returns.
+         Placeholder text here 
           </p>
         </section>
 
