@@ -48,8 +48,14 @@ const handleAddToCart = () => {
         alt={name} 
         className="product-image" 
       />
-      <h3>{name}</h3>
-      <p>${price.toFixed(2)}</p>
+        <h3>{name}</h3>
+            <p>
+        {new Intl.NumberFormat('en-GB', {
+          style: 'currency',
+          currency: 'GBP',
+        }).format(price)}
+      </p>
+
 
       <div className="add-to-cart-container">
         <button 

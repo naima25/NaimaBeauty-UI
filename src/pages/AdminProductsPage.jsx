@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../styles/AdminProductsPage.css';
 
 const AdminProductsPage = () => {
-  const {products, deleteProduct, loading, error} = useAppContext()
+  const { products, deleteProduct, loading, error } = useAppContext();
 
   const handleDelete = async (productId) => {
     if (window.confirm('Delete this product permanently?')) {
@@ -35,7 +35,7 @@ const AdminProductsPage = () => {
             <th>Name</th>
             <th>Brand</th>
             <th>Category</th>
-            <th>Price</th> {/* New column */}
+            <th>Price</th> {/* Now displayed in pounds */}
             <th>Actions</th>
           </tr>
         </thead>
@@ -51,9 +51,14 @@ const AdminProductsPage = () => {
                 />
               </td>
               <td>{product.name}</td>
-              <td>EasyCommerce</td>
+              <td>Naima Beauty</td>
               <td>{product.categoryNames}</td>
-              <td>${product.price?.toFixed(2)}</td> {/* New price cell */}
+              <td>
+                {new Intl.NumberFormat('en-GB', {
+                  style: 'currency',
+                  currency: 'GBP',
+                }).format(product.price)}
+              </td>
               <td className="action-buttons">
                 <Link 
                   to={`/admin/products/edit/${product.id}`} 

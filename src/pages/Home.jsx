@@ -1,9 +1,7 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
 import logo from '../assets/NaimaBeauty- final.png';
-
 
 function HomePage() {
   return (
@@ -37,7 +35,7 @@ function HomePage() {
               image: "https://media.johnlewiscontent.com/i/JohnLewis/110395307?fmt=auto&$background-off-white$&$rsp-pdp-port-640$"
             },
             { 
-              title: "Yves Saint Laurent Make Me Blush Bold Blurring Blush, 03 Mischievous Magenta", 
+              title: "Yves Saint Laurent Make Me Blush, Magenta 03", 
               price: "39", 
               image: "https://media.johnlewiscontent.com/i/JohnLewis/113696811?fmt=auto&$background-off-white$&$rsp-pdp-port-640$" 
             },
@@ -50,7 +48,12 @@ function HomePage() {
             <div key={index} className="card">
               <img src={product.image} alt={product.title} />
               <h3>{product.title}</h3>
-              <p>${product.price}</p>
+              <p>
+                {new Intl.NumberFormat('en-GB', {
+                  style: 'currency',
+                  currency: 'GBP',
+                }).format(parseFloat(product.price))}
+              </p>
             </div>
           ))}
         </div>
