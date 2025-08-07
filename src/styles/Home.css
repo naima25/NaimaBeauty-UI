@@ -1,73 +1,175 @@
-/* Account for fixed header */
+/* Full-width hero banner */
+.home-hero-image {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 80px;
+}
+
+.home-hero-image img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Main container for centered content */
 .home-container {
-  padding-top: 100px; 
-  padding-bottom: 100px;
+  padding-top: 160px;
+  padding-bottom: 160px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Hero section */
+/* Hero text section */
 .hero {
   text-align: center;
-  padding: 60px 20px;
-
+  padding: 80px 50px;
   border-radius: 10px;
-  margin-bottom: 40px;
+  margin-top: 0;
+  margin-bottom: 100px;
+  background-color: #fff7fb;
+  box-shadow: 0 6px 18px rgba(179, 46, 124, 0.12);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
 
 .hero h1 {
-  font-family: Calibri, sans-serif;
-  font-size: 2.0rem; 
-  margin-bottom: 10px;
+  font-family: 'Calibri', sans-serif;
+  font-size: 2.6rem; /* moderate headline */
+  font-weight: 700;
+  margin-bottom: 30px;
   color: #490541;
+  letter-spacing: 1.3px;
+  line-height: 1.2;
 }
 
-/* Supporting text */
 .hero p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+  font-size: 1.3rem; /* moderate paragraph */
+  margin-bottom: 40px;
   color: #4e041f;
+  line-height: 1.6;
 }
 
-/* Button / link */
+/* Stylish button */
 .hero a {
-  margin-top: 15px;
   display: inline-block;
   text-decoration: none;
-  background-color: #f30fd8;
+  background: linear-gradient(135deg, #f30fd8, #d30b94);
   color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: bold;
+  padding: 16px 32px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 5px 14px rgba(243, 15, 216, 0.5);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
+.hero a:hover {
+  background: linear-gradient(135deg, #d30b94, #f30fd8);
+  box-shadow: 0 7px 18px rgba(211, 11, 148, 0.7);
+}
+
+/* Cards section */
+.cards-section h2 {
+  text-align: center;
+  color: #490541;
+  font-size: 2.4rem; /* moderate heading */
+  margin-bottom: 50px;
+  font-weight: 700;
+}
 
 .card-grid {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .card {
-  width: 200px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 10px;
+  width: 260px;
+  border: 1px solid #e0c0d8;
+  border-radius: 12px;
+  padding: 22px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(179, 46, 124, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(179, 46, 124, 0.25);
 }
 
 .card img {
   width: 100%;
-  max-height: 150px;
+  max-height: 180px;
   object-fit: contain;
-  border-radius: 5px;
+  border-radius: 8px;
+  margin-bottom: 18px;
 }
 
-.cards-section h2 {
-  text-align: center;
-  color: #490541; 
-  margin-bottom: 20px; 
+.card h3 {
+  font-size: 1.15rem; /* moderate size */
+  color: #490541;
+  margin-bottom: 14px;
+  font-weight: 600;
 }
 
+.card p {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #d30b94;
+  margin: 0;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 30px;
+    max-width: 90%;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  .card {
+    width: 48%;
+    padding: 18px;
+  }
+
+  .card img {
+    max-height: 150px;
+  }
+
+  .cards-section h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+}
