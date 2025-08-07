@@ -1,4 +1,3 @@
-/* Full-width hero banner */
 .home-hero-image {
   width: 100vw;
   position: relative;
@@ -9,20 +8,26 @@
   overflow: hidden;
   border-radius: 0;
   box-shadow: none;
-  margin-bottom: 80px;
+  margin-bottom: 60px; /* reduce bottom space a bit */
+  min-height: 200px; /* lowered from 250px */
+  max-height: 300px; /* prevent it from growing too tall */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-hero-image img {
   width: 100%;
-  max-height: 380px;
-  object-fit: cover;
+  max-height: 300px; /* keep image height capped */
+  object-fit: cover; /* use cover for better fill */
   display: block;
 }
 
+
 /* Main container for centered content */
 .home-container {
-  padding-top: 160px;
-  padding-bottom: 160px;
+  padding-top: 140px;
+  padding-bottom: 140px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -30,10 +35,10 @@
 /* Hero text section */
 .hero {
   text-align: center;
-  padding: 80px 50px;
+  padding: 60px 40px;
   border-radius: 10px;
   margin-top: 0;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
   background-color: #fff7fb;
   box-shadow: 0 6px 18px rgba(179, 46, 124, 0.12);
   max-width: 700px;
@@ -43,19 +48,19 @@
 
 .hero h1 {
   font-family: 'Calibri', sans-serif;
-  font-size: 2.6rem; /* moderate headline */
+  font-size: 2.6rem; /* toned down headline */
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   color: #490541;
-  letter-spacing: 1.3px;
+  letter-spacing: 1.1px;
   line-height: 1.2;
 }
 
 .hero p {
-  font-size: 1.3rem; /* moderate paragraph */
-  margin-bottom: 40px;
+  font-size: 1.2rem; /* toned down paragraph */
+  margin-bottom: 32px;
   color: #4e041f;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Stylish button */
@@ -64,10 +69,10 @@
   text-decoration: none;
   background: linear-gradient(135deg, #f30fd8, #d30b94);
   color: white;
-  padding: 16px 32px;
+  padding: 14px 28px;
   border-radius: 30px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
   box-shadow: 0 5px 14px rgba(243, 15, 216, 0.5);
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
@@ -81,15 +86,15 @@
 .cards-section h2 {
   text-align: center;
   color: #490541;
-  font-size: 2.4rem; /* moderate heading */
-  margin-bottom: 50px;
+  font-size: 2.4rem;
+  margin-bottom: 40px;
   font-weight: 700;
 }
 
 .card-grid {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 36px;
   flex-wrap: wrap;
   margin-top: 30px;
 }
@@ -98,7 +103,7 @@
   width: 260px;
   border: 1px solid #e0c0d8;
   border-radius: 12px;
-  padding: 22px;
+  padding: 20px;
   background-color: #fff;
   box-shadow: 0 3px 10px rgba(179, 46, 124, 0.1);
   transition: box-shadow 0.3s ease;
@@ -110,16 +115,16 @@
 
 .card img {
   width: 100%;
-  max-height: 180px;
+  max-height: 170px;
   object-fit: contain;
   border-radius: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .card h3 {
-  font-size: 1.15rem; /* moderate size */
+  font-size: 1.2rem;
   color: #490541;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   font-weight: 600;
 }
 
@@ -133,12 +138,12 @@
 /* Responsive tweaks */
 @media (max-width: 768px) {
   .hero {
-    padding: 60px 30px;
+    padding: 50px 30px;
     max-width: 90%;
   }
 
   .hero h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .hero p {
@@ -147,11 +152,11 @@
 
   .card {
     width: 48%;
-    padding: 18px;
+    padding: 16px;
   }
 
   .card img {
-    max-height: 150px;
+    max-height: 140px;
   }
 
   .cards-section h2 {
@@ -166,7 +171,7 @@
   }
 
   .hero h1 {
-    font-size: 1.9rem;
+    font-size: 1.6rem;
   }
 
   .hero p {

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../styles/Header.css";
-// import logo from '../assets/EasyCommerce-icon.svg';
+import logo from '../assets/NaimaBeauty- final.png';
 import { useAppContext } from "../context/AppContext"; 
 import { FaShoppingCart } from "react-icons/fa";
+
 
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ const Header = () => {
           className={`header-logo-link ${location.pathname === '/home' ? 'active' : ''}`}
           onClick={closeMenu}
         >
-          {/* <img src={logo} alt="Easy Commerce logo" className="header-logo" /> */}
+          <img src={logo} alt="NaimaBeauty logo" className="header-logo" />
           <span className="header-logo-text"><span className="header-logo-text-easy">Naima</span>Beauty</span>
         </Link>
       </div>
