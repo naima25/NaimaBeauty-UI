@@ -5,7 +5,6 @@ import logo from '../assets/NaimaBeauty- final.png';
 import { useAppContext } from "../context/AppContext"; 
 import { FaShoppingCart } from "react-icons/fa";
 
-
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const { cart, isAuthenticated, logout, getTotalItems, userRole } = useAppContext();
@@ -26,7 +25,7 @@ const Header = () => {
   };
 
   const totalCartQuantity = cart?.cartItems?.reduce((sum, item) => sum + item.quantity, 0) || 0;
-//   console.log(logo)
+
   return (
     <nav>
       <div className="logo">
@@ -36,7 +35,9 @@ const Header = () => {
           onClick={closeMenu}
         >
           <img src={logo} alt="NaimaBeauty logo" className="header-logo" />
-          <span className="header-logo-text"><span className="header-logo-text-easy">Naima</span>Beauty</span>
+          <span className="header-logo-text">
+            <span className="header-logo-text-easy">Naima</span>Beauty
+          </span>
         </Link>
       </div>
       <ul className={`menu ${isMenuOpen ? "active" : ""}`}>
@@ -60,7 +61,7 @@ const Header = () => {
           </Link>
         </li>
 
-        {/* User-specific Links - only visible to authenticated users with 'user' role */}
+        {/* User-specific Links - only visible to authenticated users with 'User' role */}
         {isAuthenticated && userRole === "User" && (
           <>
             <li>
@@ -87,17 +88,28 @@ const Header = () => {
           </>
         )}
 
-        {/* Admin-specific Links - only visible to authenticated users with 'admin' role */}
+        {/* Admin-specific Links - only visible to authenticated users with 'Admin' role */}
         {isAuthenticated && userRole === "Admin" && (
-          <li>
-            <Link
-              to="/admin/products"  
-              className={location.pathname.startsWith("/admin") ? "active" : ""}
-              onClick={closeMenu}
-            >
-              Dashboard
-            </Link>
-          </li>
+          <>
+            <li>
+              <Link
+                to="/admin/products"
+                className={location.pathname.startsWith("/admin/products") ? "active" : ""}
+                onClick={closeMenu}
+              >
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin/analytics"
+                className={location.pathname === "/admin/analytics" ? "active" : ""}
+                onClick={closeMenu}
+              >
+                Analytics
+              </Link>
+            </li>
+          </>
         )}
 
         {/* Auth Links - conditionally shown based on authentication status */}

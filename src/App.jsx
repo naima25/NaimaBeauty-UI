@@ -22,6 +22,8 @@ import AdminProductsPage from './pages/AdminProductsPage';
 import AdminCategoriesPage from './pages/AdminCategoriesPage';  
 import AdminProductForm from './components/AdminProductForm'; // Corrected import for AdminProductForm
 import AdminCategoryForm from './components/AdminCategoryForm'; // Import AdminCategoryForm for category creation/edit
+import Analytics from './pages/AnalyticsPage';
+
 
 import './App.css';
 
@@ -46,9 +48,13 @@ const App = () => {
 
               {/* Routes for authenticated users */}
               <Route path="/cart" element={<ProtectedRoute role="User" element={<Cart />} />} />
-              <Route path="/my-orders" element={<ProtectedRoute role="User" element={<MyOrders />} />} />  
+              <Route path="/my-orders" element={<ProtectedRoute role="User" element={<MyOrders />} />} /> 
+ 
 
               {/* Admin Routes */}
+              {/* Admin Analytics */}
+            <Route path="/admin/analytics" element={<ProtectedRoute role="Admin" element={<Analytics />} />} />
+
               {/* Redirect to /admin/products by default when accessing /admin */}
               <Route path="/admin" element={<ProtectedRoute role="Admin" element={<Navigate to="/admin/products" replace />} />} />
               
