@@ -10,6 +10,14 @@ const OrdersPage = () => {
   if (loading) return <div>Loading your orders...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  // Format price in GBP
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'GBP',
+    }).format(price || 0);
+  };
+
   const handleUpdateQuantity = async (orderId, orderItemId) => {
     const success = await updateOrderItemQuantity(orderId, orderItemId, newQuantity);
     if (success) {
@@ -41,7 +49,7 @@ const OrdersPage = () => {
                   >
                     Cancel Order
                   </button>
-                  <p className="order-total">Total: ${order.price.toFixed(2)}</p>
+                  <p className="order-total">Total: {formatPrice(order.price)}</p>
                 </div>
               </div>
               
@@ -91,8 +99,8 @@ const OrdersPage = () => {
                           </button>
                         </div>
                       )}
-                      <p>Price: ${item.product?.price?.toFixed(2) || '0.00'}</p>
-                      <p>Subtotal: ${(item.quantity * (item.product?.price || 0)).toFixed(2)}</p>
+                      <p>Price: {formatPrice(item.product?.price)}</p>
+                      <p>Subtotal: {formatPrice(item.quantity * (item.product?.price || 0))}</p>
                     </div>
                     <button
                       onClick={async () => {
