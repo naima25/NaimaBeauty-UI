@@ -35,7 +35,7 @@ const Header = () => {
           onClick={closeMenu}
         >
           {/* <img src={logo} alt="Easy Commerce logo" className="header-logo" /> */}
-          <span className="header-logo-text"><span className="header-logo-text-easy">Easy</span>Commerce</span>
+          <span className="header-logo-text"><span className="header-logo-text-easy">Naima</span>Beauty</span>
         </Link>
       </div>
       <ul className={`menu ${isMenuOpen ? "active" : ""}`}>

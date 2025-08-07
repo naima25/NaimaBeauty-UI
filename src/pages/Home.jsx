@@ -16,19 +16,19 @@ function HomePage() {
         <div className="card-grid">
           {[
             {
-              title: "Elemis Superfood Midnight Facial, 50ml",
-              price: "46.00",
-              image: "https://media.johnlewiscontent.com/i/JohnLewis/240516699?fmt=auto&$background-off-white$&wid=640&hei=853"
+              title: "DIOR Backstage Face & Body Foundation",
+              price: "41.00",
+              image: "https://media.johnlewiscontent.com/i/JohnLewis/110395307?fmt=auto&$background-off-white$&$rsp-pdp-port-640$"
             },
             { 
-              title: "Dior Maximizer Lip Gloss", 
-              price: "46", 
-              image: "https://media.johnlewiscontent.com/i/JohnLewis/238486903?fmt=auto&$background-off-white$&wid=640&hei=853" 
+              title: "Yves Saint Laurent Make Me Blush Bold Blurring Blush, 03 Mischievous Magenta", 
+              price: "39", 
+              image: "https://media.johnlewiscontent.com/i/JohnLewis/113696811?fmt=auto&$background-off-white$&$rsp-pdp-port-640$" 
             },
             { 
-              title: "Clarins Super Restorative Night Cream, All Skin Types, 50ml", 
-              price: "89.00", 
-              image: "https://media.johnlewiscontent.com/i/JohnLewis/241054352alt1?fmt=auto&$background-off-white$&wid=640&hei=853"
+              title: "Hourglass Ambient Lighting Blush", 
+              price: "46.00", 
+              image: "https://media.johnlewiscontent.com/i/JohnLewis/239746700?fmt=auto&$background-off-white$&$rsp-pdp-port-640$"
             }
           ].map((product, index) => (
             <div key={index} className="card">
