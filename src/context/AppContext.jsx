@@ -131,7 +131,8 @@ export const AppProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       console.log("Email and password: ", {email, password})
-      const response = await api.post('/account/register', {email, password });
+      // const response = await api.post('/account/register', {email, password });
+      const response = await api.post('/account/register', { Email: email, Password: password });
       console.log("response: ", response)
 
       if (!response.data.token) throw new Error('No token received');
