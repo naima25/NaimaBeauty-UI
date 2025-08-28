@@ -1,21 +1,7 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { useNavigate } from 'react-router-dom';
-
-  /* 
-LoginPage Component:
-This component allows users to log into the application by providing their email and password.
-It communicates with the authentication service (`AuthService`) to validate the credentials and retrieve a token for successful login.
-
-Key Features:
-  1. **Email and Password Inputs**: The form includes two inputs for email and password. The input fields are controlled via React's `useState`.
-  2. **Login Handling**: Upon form submission, the `handleLogin` function is invoked, which makes an asynchronous call to the `loginUser` function (from `AuthService`) to authenticate the user.
-  3. **Token Storage**: If login is successful, the returned token is stored in `localStorage` for session persistence, and the user is informed that the login was successful.
-  4. **Error Handling**: If an error occurs during the login process (e.g., invalid credentials or no token received), an error message is displayed to the user.
-  5. **Success Message**: If login is successful, a success message is displayed to inform the user of successful login.
-
-The component uses controlled components for handling form data and updates the UI to reflect success or error states based on the result of the login attempt.
-*/
+import '../styles/LoginPage.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -23,9 +9,7 @@ const LoginPage = () => {
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
-  const {login,error} = useAppContext()
-
-  
+  const { login, error } = useAppContext();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -34,34 +18,54 @@ const LoginPage = () => {
     try {
       await login(email, password);
       setSuccess('Login successful!');
-      navigate('/our-products')
+      navigate('/our-products');
     } catch (err) {
-      console.log("Login Error: ", err)
+      console.log("Login Error: ", err);
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        {success && <p style={{ color: 'green' }}>{success}</p>}
-      </form>
+    <div className="login-container">
+      {/* Decorative elements */}
+      <div className="login-decoration login-decoration-1"></div>
+      <div className="login-decoration login-decoration-2"></div>
+      
+      <div className="login-header">
+        <h2>Welcome Back</h2>
+      </div>
+      
+      <div className="login-content">
+        <form onSubmit={handleLogin}>
+          <div className="login-input-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          
+          <div className="login-input-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          
+          <button type="submit" className="login-submit-button">Sign In</button>
+          
+          {error && <div className="login-message login-error-message">{error}</div>}
+          {success && <div className="login-message login-success-message">{success}</div>}
+        </form>
+      </div>
     </div>
   );
 };

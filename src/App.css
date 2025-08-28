@@ -1,55 +1,64 @@
+/* App.css */
 
-/*
-  main.css
+/* CSS Variables for consistent spacing */
+:root {
+  --header-height: 120px;
+  --footer-height: 400px; /* Estimate of footer height */
+  --content-padding: 20px;
+  --max-content-width: 1200px;
+}
 
-  - #root: Centers content with a max width of 1280px, adds padding and center alignment.
-  - .logo: Styles the logo with a hover effect (drop-shadow) and smooth transition.
-  - .card: Adds padding to card components.
-  - .read-the-docs: Colors the "Read the Docs" link with a subtle gray.
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  The file enhances UI with smooth animations and responsive design.
-*/
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
 
+body {
+  font-family: 'Calibri', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+  position: relative;
+  min-height: 100vh;
+}
 
-#root {
-  max-width: 1280px;
+/* Main app container */
+.app-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  max-width: var(--max-content-width);
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: var(--content-padding);
+  /* padding-top: calc(var(--header-height) + var(--content-padding)); */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* Responsive design */
+@media (max-width: 768px) {
+  :root {
+    --content-padding: 15px;
+    --header-height: 100px;
+    --footer-height: 500px; /* Increased for mobile */
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 480px) {
+  :root {
+    --content-padding: 10px;
+    --header-height: 90px;
+    --footer-height: 550px; /* Increased for mobile */
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

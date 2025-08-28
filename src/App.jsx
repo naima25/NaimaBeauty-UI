@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 // Import AppContect
 import { useAppContext } from './context/AppContext';
@@ -27,13 +27,14 @@ import Analytics from './pages/AnalyticsPage';
 
 import './App.css';
 
-const App = () => {
+const AppContent = () => {
   const { isAuthenticated } = useAppContext();
+  const location = useLocation();
+  const isAccountPage = location.pathname === '/account';
 
   return (
-      <Router>
-        <div className="app-container">
-          <Header />
+    <div className="app-container">
+      {!isAccountPage && <Header />}
           <main className="main-content">
             <Routes>
               {/* Public Routes */}
@@ -80,10 +81,18 @@ const App = () => {
 
             </Routes>
           </main>
-          <Footer />
-        </div>
-      </Router>
+          {/* <Footer /> */}
+
+    </div>
   );
-}
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+};
 
 export default App;

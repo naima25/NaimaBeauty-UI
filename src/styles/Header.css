@@ -1,168 +1,374 @@
-/* Reset and base styling */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Calibri, sans-serif;
+/* Header.css */
+
+/* Import elegant font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #D4AF37;
+  --light-gold: #F1E5AC;
+  --dark-gold: #B8860B;
+  --white: #FFFFFF;
+  --off-white: #F8F5F0;
+  --light-gray: #F5F5F5;
+  --dark-gray: #333333;
+  --text-color: #2C2C2C;
+  --header-height: 120px;
 }
 
-/* NAVBAR STYLINGGG */
+/* NAVBAR STYLING */
 nav {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-background-color: #ffffff4b; 
-padding: 15px 30px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-z-index: 1000;
-box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Header hidden state when scrolling down */
+nav.header-hidden {
+  transform: translateY(-100%);
+}
+
+/* Header background appears on hover */
+nav:hover {
+  background-color: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Text color changes on hover */
+nav:not(:hover) .menu li a {
+  color: var(--white);
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+nav:hover .menu li a {
+  color: var(--dark-gray);
+  font-weight: 500;
+  text-shadow: none;
+}
+
+/* Logo row - centered at top */
+.logo-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  height: 60%;
 }
 
 /* LOGO */
 .header-logo-link {
-  display: inline-flex;       /* line up image + text */
-  align-items: center;        /* vertical-center them */
-  text-decoration: none;      /* if you don’t want the underline */
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
 }
 
 .header-logo {
-  width: 2rem;                /* or whatever size you like */
+  margin-top: 2.5rem;
+  width: 9rem;
   height: auto;
+  transition: all 0.4s ease;
 }
 
-.header-logo-text {
-  margin-left: 0.5rem;        /* spacing between logo & text */
-  font-size: 1.25rem;         /* adjust as needed */
-  font-weight: bold;
-  color: #e9468a;             /* match link color */
-}
-.header-logo-text-easy {
-  margin-left: 0.5rem;        /* spacing between logo & text */
-  font-size: 1.25rem;         /* adjust as needed */
-  font-weight: bold;
-  color: black;             /* match link color */
+/* White logo (shown by default) */
+.white-logo {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
+/* Colored logo (shown on hover) */
+.colored-logo {
+  opacity: 0;
+  position: relative;
+}
+
+/* Show colored logo on hover */
+nav:hover .white-logo {
+  opacity: 0;
+}
+
+nav:hover .colored-logo {
+  opacity: 1;
+}
+
+/* Navigation row - centered below logo */
+.nav-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  height: 40%;
+}
 
 /* MENU LIST */
 .menu {
-display: flex;
-gap: 25px;
-list-style: none;
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Account link positioned to the left */
+.account-item {
+  margin-right: auto;
 }
 
 /* MENU LINKS */
 .menu li a {
-color: black;
-text-decoration: none;
-font-size: 16px;
-font-weight: 400;
-transition: color 0.3s ease;
-position: relative; /* To position the pseudo-elements */
-padding: 10px 0; /* Padding for space around the text */
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 8px 0;
+  letter-spacing: 0.5px;
 }
 
-/* Horizontal line effects on hover */
+/* Horizontal line effects on hover - updated to gold */
 .menu li a::before,
 .menu li a::after {
-content: '';
-position: absolute;
-width: 100%;
-height: 2px;
-background-color: #fa00ddf0; /* Purple line color to match hover color */
-left: 0;
-transition: all 0.3s ease;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--gold);
+  left: 0;
+  transition: all 0.3s ease;
 }
 
 .menu li a::before {
-top: 0; /* Position the line above the text */
-transform: scaleX(0); /* Initially, hide the line */
-transform-origin: left;
+  top: 0;
+  transform: scaleX(0);
+  transform-origin: left;
 }
 
 .menu li a::after {
-bottom: 0; /* Position the line below the text */
-transform: scaleX(0); /* Initially, hide the line */
-transform-origin: left;
+  bottom: 0;
+  transform: scaleX(0);
+  transform-origin: left;
 }
 
 /* Hover effect: show the lines */
 .menu li a:hover::before,
 .menu li a:hover::after {
-transform: scaleX(1); /* Expand the lines on hover */
+  transform: scaleX(1);
 }
 
 /* Hover effect on the link itself */
 .menu li a:hover,
 .menu li a.active {
-color: #fa00ddf0; /* Change the color of the link on hover */
+  color: var(--gold) !important;
 }
-
-/* MENU ICON FOR MOBILE */
-.menu-icon {
-display: none;
-font-size: 28px;
-color: black;
-cursor: pointer;
-}
-
-/* RESPONSIVE MENU */
-@media (max-width: 768px) {
-.menu {
-  position: absolute;
-  top: 70px; /* below the fixed navbar */
-  left: 0;
-  width: 100%;
-  flex-direction: column;
-  background-color: #808080;
-  display: none;
-  text-align: center;
-  padding: 20px 0;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-}
-
-.menu.active {
-  display: flex;
-}
-
-.menu li {
-  margin: 10px 0;
-}
-
-.menu-icon {
-  display: block;
-}
-}
-
-/* Header.css */
 
 /* Style for the cart icon */
 .nav-cart-item .cart-icon {
-color: #f89100; /* Set the desired color for the cart icon */
-transition: color 0.3s ease;
+  color: var(--gold);
+  transition: color 0.3s ease;
+  font-size: 1.2rem;
 }
 
 /* Style for the cart link on hover */
 .nav-cart-item .cart-link:hover .cart-icon {
-color: #ed7f66; /* Change color on hover */
+  color: var(--dark-gold);
 }
 
 /* Style for the cart text */
 .nav-cart-item .cart-text {
-color: #333; /* Default color for the cart text */
-font-weight: bold;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 /* Style for the cart quantity number */
 .nav-cart-item .cart-counter {
-background-color: #e9468a; /* Background color for the quantity counter */
-color: white; /* Text color for the number */
-padding: 0.2rem 0.5rem;
-border-radius: 50%; /* Circular shape */
-font-size: 1rem;
-margin-left: 5px;
+  background-color: var(--gold);
+  color: var(--white);
+  padding: 0.2rem 0.5rem;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  margin-left: 5px;
+  font-weight: 600;
 }
 
+/* MENU ICON FOR MOBILE */
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  color: var(--dark-gray);
+  cursor: pointer;
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  z-index: 1001;
+  transition: color 0.3s ease;
+}
+
+.menu-icon:hover {
+  color: var(--gold);
+}
+
+/* RESPONSIVE MENU */
+@media (max-width: 992px) {
+  :root {
+    --header-height: 100px;
+  }
+  
+  .menu {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: 80px;
+  }
+  
+  nav:not(:hover) .menu li a {
+    color: var(--dark-gray);
+    font-weight: 500;
+    text-shadow: none;
+  }
+  
+  .logo-row {
+    padding: 10px 0 10px 20px;
+    justify-content: flex-start;
+    height: 100%;
+    width: auto;
+  }
+  
+  .nav-row {
+    display: none;
+  }
+  
+  .menu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--white);
+    display: none;
+    text-align: center;
+    padding: 25px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    gap: 0;
+  }
+
+  .menu.active {
+    display: flex;
+  }
+
+  .menu li {
+    margin: 12px 0;
+    width: 100%;
+  }
+  
+  .menu li a {
+    padding: 12px 20px;
+    display: block;
+    font-size: 1.1rem;
+  }
+  
+  .account-item {
+    margin-right: 0;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+  
+  /* Mobile logo adjustments */
+  .white-logo, .colored-logo {
+    margin-top: 0;
+    width: 7rem;
+  }
+  
+  /* On mobile, always show colored logo */
+  .white-logo {
+    opacity: 0;
+  }
+  
+  .colored-logo {
+    opacity: 1;
+  }
+  
+  /* Adjust cart counter for mobile */
+  .nav-cart-item .cart-counter {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 70px;
+  }
+  
+  nav {
+    height: 70px;
+  }
+  
+  .menu {
+    top: 70px;
+  }
+  
+  .white-logo, .colored-logo {
+    width: 6rem;
+  }
+  
+  .menu-icon {
+    right: 15px;
+    top: 20px;
+  }
+}
+
+/* Animation for menu items on mobile */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu.active li {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.menu.active li:nth-child(1) { animation-delay: 0.1s; }
+.menu.active li:nth-child(2) { animation-delay: 0.2s; }
+.menu.active li:nth-child(3) { animation-delay: 0.3s; }
+.menu.active li:nth-child(4) { animation-delay: 0.4s; }
+.menu.active li:nth-child(5) { animation-delay: 0.5s; }
+.menu.active li:nth-child(6) { animation-delay: 0.6s; }
