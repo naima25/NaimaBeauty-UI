@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // Import AppContect
 import { useAppContext } from './context/AppContext';
@@ -25,6 +27,8 @@ import AdminCategoryForm from './components/AdminCategoryForm'; // Import AdminC
 import Analytics from './pages/AnalyticsPage';
 
 
+
+
 import './App.css';
 
 const AppContent = () => {
@@ -36,6 +40,9 @@ const AppContent = () => {
     <div className="app-container">
       {!isAccountPage && <Header />}
           <main className="main-content">
+
+ 
+            
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<Home />} />
