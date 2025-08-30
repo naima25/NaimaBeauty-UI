@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {useAppContext} from '../context/AppContext'
 import { Link } from 'react-router-dom';
 import '../styles/AdminProductsPage.css';
+import '../styles/HeroStyles.css';
 
 /* 
   AdminCategoriesPage Component:
@@ -27,9 +28,23 @@ const AdminCategoriesPage = () => {
 
   return (
     <div className="admin-products-container">
-      <h2>Categories</h2>
+      {/* Hero Section */}
+      <section className="admin-hero">
+        <div 
+          className="hero-background"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=2070')`
+          }}
+        >
+          <div className="hero-content">
+            <h1>Category Management</h1>
+            <p>Organize and manage your product categories</p>
+          </div>
+        </div>
+      </section>
 
-      <div className="admin-controls">
+      <div className="admin-content">
+        <div className="admin-controls">
         <Link to="/admin/categories/new" className="add-button">
           + Add New Category
         </Link>
@@ -69,6 +84,7 @@ const AdminCategoriesPage = () => {
         <Link to="/admin/products" className="back-to-products-button">
           Back to Products Dashboard
         </Link>
+      </div>
       </div>
     </div>
   );

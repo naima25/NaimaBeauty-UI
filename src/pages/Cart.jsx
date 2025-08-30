@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppContext } from '../context/AppContext';
 import '../styles/Cart.css';
+import '../styles/HeroStyles.css';
 
 const CartPage = () => {
   const {
@@ -53,9 +54,23 @@ const CartPage = () => {
 
   return (
     <div className="cart-page">
-      <h1 className="cart-title">Your Cart</h1>
+      {/* Hero Section */}
+      <section className="cart-hero">
+        <div 
+          className="hero-background"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=2070')`
+          }}
+        >
+          <div className="hero-content">
+            <h1>Shopping Cart</h1>
+            <p>Review your selected items and proceed to checkout</p>
+          </div>
+        </div>
+      </section>
 
-      {cart?.cartItems?.length > 0 ? (
+      <div className="cart-content">
+        {cart?.cartItems?.length > 0 ? (
         <div>
           <div className="cart-actions">
             <button onClick={handleClearCart} className="clear-cart-button">
@@ -121,8 +136,9 @@ const CartPage = () => {
           </h3>
         </div>
       ) : (
-        <p>Your cart is empty.</p>
-      )}
+          <p>Your cart is empty.</p>
+        )}
+      </div>
     </div>
   );
 };

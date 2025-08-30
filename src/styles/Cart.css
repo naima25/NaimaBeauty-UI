@@ -1,99 +1,239 @@
-/* cart.css
+/* Cart.css */
 
-  This CSS file defines the styling for the "Cart Page" component, which displays the user's shopping cart, 
-  including the list of items, their details, and a total price. The design is intended to be clean, user-friendly, 
-  and responsive across devices. */
+/* Import the same elegant font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #D4AF37;
+  --light-gold: #F1E5AC;
+  --dark-gold: #B8860B;
+  --white: #FFFFFF;
+  --off-white: #F8F5F0;
+  --light-gray: #F5F5F5;
+  --dark-gray: #333333;
+  --text-color: #2C2C2C;
+}
 
 .cart-page {
-    padding: 100px 20px 40px;
-    max-width: 900px;
-    margin: 0 auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
+  background-color: var(--white);
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cart-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.cart-title:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 2px;
+  background-color: var(--gold);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Empty cart message */
+.cart-page > p {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 3rem;
+  color: #666;
+}
+
+/* Cart actions */
+.cart-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.clear-cart-button,
+.create-order-button {
+  background-color: transparent;
+  border: 1px solid var(--dark-gray);
+  color: var(--dark-gray);
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clear-cart-button {
+  border-color: #d9534f;
+  color: #d9534f;
+}
+
+.clear-cart-button:hover {
+  background-color: #d9534f;
+  color: var(--white);
+}
+
+.create-order-button {
+  border-color: var(--gold);
+  color: var(--dark-gray);
+}
+
+.create-order-button:hover {
+  background-color: var(--gold);
+  color: var(--dark-gray);
+}
+
+/* Cart items */
+.cart-item {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 1.5rem;
+}
+
+.cart-item-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-details h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--dark-gray);
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.quantity-button {
+  background-color: transparent;
+  border: 1px solid var(--gold);
+  color: var(--dark-gray);
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.quantity-button:hover:not(:disabled) {
+  background-color: var(--gold);
+}
+
+.quantity-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-display {
+  font-weight: 600;
+  min-width: 30px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.cart-item-details p {
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.remove-button {
+  background-color: transparent;
+  border: 1px solid #d9534f;
+  color: #d9534f;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 1rem;
+}
+
+.remove-button:hover {
+  background-color: #d9534f;
+  color: var(--white);
+}
+
+/* Cart total */
+.cart-total {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  text-align: right;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  border-top: 2px solid var(--gold);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cart-page {
+    padding: 1rem;
+  }
+  
+  .cart-item {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .cart-item-image {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+  }
+  
+  .cart-actions {
+    flex-direction: column;
+    align-items: flex-end;
   }
   
   .cart-title {
     font-size: 2rem;
-    margin-bottom: 30px;
-    text-align: center;
-    color: #02528e;
   }
-  
+}
+
+@media (max-width: 480px) {
   .cart-item {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .cart-item img {
-    width: 100px;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .cart-item-details {
-    flex: 1;
+    padding: 1rem;
   }
   
   .cart-item-details h3 {
-    margin: 0 0 10px;
-    font-size: 1.2rem;
-  }
-  
-  .cart-item-details p {
-    margin: 5px 0;
-    color: #555;
-  }
-  
-  .remove-button {
-    background-color: #ff35d0;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .remove-button:hover {
-    background-color: #d32f2f;
+    font-size: 1.5rem;
   }
   
   .cart-total {
-    font-size: 1.5rem;
-    text-align: right;
-    margin-top: 30px;
-    color: #222;
+    font-size: 1.7rem;
+    text-align: center;
   }
   
- 
-  @media (max-width: 600px) {
-    .cart-item {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  
-    .cart-item img {
-      width: 80%;
-      max-width: 200px;
-    }
-  
-    .cart-item-details h3 {
-      font-size: 1rem;
-    }
-  
-    .remove-button {
-      margin-top: 10px;
-    }
-  
-    .cart-total {
-      text-align: center;
-      font-size: 1.3rem;
-    }
+  .quantity-controls {
+    justify-content: center;
   }
-  
+}

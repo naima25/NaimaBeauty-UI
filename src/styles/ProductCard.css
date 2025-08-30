@@ -1,50 +1,130 @@
-/* 
-  product-card.css
-
-  This CSS file defines the styling for individual product cards that are displayed in a grid or flex layout. 
-  The styles aim to create visually appealing and interactive cards that scale well on different screen sizes.
-*/
+/* ProductCard.css */
 
 .product-card {
-    flex: 1 1 calc(25% - 30px);
-    max-width: 320px;
-    min-width: 250px;
-    padding: 1rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .product-card img {
-    width: 100%;
-    height: 260px;
-    object-fit: contain;
-    object-position: center;
-    background: white;
-    border-radius: 8px;
-    border: 1px solid #eee;
-  }
-  
-  @media (max-width: 768px) {
-    .product-card {
-      flex: 1 1 calc(50% - 20px);
-    }
-  
-    .product-card img {
-      height: 200px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .product-card {
-      flex: 1 1 100%;
-    }
-  }
-  
+  background: var(--white);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
 
+.product-image {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.product-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  margin: 1rem 1.5rem 0.5rem;
+  color: var(--dark-gray);
+  font-weight: 600;
+}
+
+.product-card p {
+  margin: 0 1.5rem 1.5rem;
+  font-weight: 600;
+  color: var(--dark-gray);
+  font-size: 1.1rem;
+}
+
+/* Add to Cart Container */
+.add-to-cart-container {
+  margin-top: auto;
+  padding: 0 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.add-to-cart-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: transparent;
+  border: 1px solid var(--dark-gray);
+  color: var(--dark-gray);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.add-to-cart-button:hover:not(:disabled) {
+  background-color: var(--dark-gray);
+  color: var(--white);
+}
+
+.add-to-cart-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Quantity Buttons */
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.quantity-buttons button {
+  background-color: transparent;
+  border: 1px solid var(--gold);
+  color: var(--dark-gray);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quantity-buttons button:hover:not(:disabled) {
+  background-color: var(--gold);
+}
+
+.quantity-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-buttons span {
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-image {
+    height: 250px;
+  }
+  
+  .product-card h3 {
+    font-size: 1.2rem;
+  }
+}

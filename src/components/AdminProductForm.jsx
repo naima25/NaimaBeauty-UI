@@ -1,80 +1,85 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import '../styles/AdminProductForm.css'; 
-
-/*
-
-  This component is used to add/edit products in the admin panel.
-  - If there's an ID in the URL, it fetches product details and allows editing.
-  - If not, it shows a blank form to create a new product.
-  - It also fetches available categories to choose from in a dropdown.
-  - After submitting, it saves the product and navigates back to the product list.
-*/
 
 const AdminProductForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const {categories,getProductById,updateOrCreateProduct } = useAppContext(); 
-
+  const { categories, getProductById, updateOrCreateProduct } = useAppContext(); 
 
   const [product, setProduct] = useState({
     name: '',
     price: '',
     category: '',
     imageUrl: '',
+    description: ''
   });
 
   const [isEditing, setIsEditing] = useState(false);
+  const [imagePreview, setImagePreview] = useState('');
 
+  useEffect(() => {
+    let isMounted = true;
 
-useEffect(() => {
-  let isMounted = true; // Flag to track component mount status
-
-  const fetchProduct = async () => {
-    if (id) {
-      setIsEditing(true);
-      try {
-        const productData = await getProductById(id);
-        if (isMounted) { // Only update state if component is still mounted
-          setProduct(productData);
+    const fetchProduct = async () => {
+      if (id) {
+        setIsEditing(true);
+        try {
+          const productData = await getProductById(id);
+          if (isMounted) {
+            setProduct(productData);
+            if (productData.imageUrl) {
+              setImagePreview(productData.imageUrl);
+            }
+          }
+        } catch (error) {
+          console.error("Failed to fetch product:", error);
         }
-      } catch (error) {
-        console.error("Failed to fetch product:", error);
-        // Handle error (e.g., show error message)
+      } else {
+        setIsEditing(false);
       }
-    } else {
-      setIsEditing(false);
-    }
-  };
+    };
 
-  fetchProduct();
+    fetchProduct();
 
-  return () => {
-    isMounted = false; // Cleanup function to prevent state updates after unmount
-  };
-}, [id]);
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct((prev) => ({ ...prev, [name]: value }));
+    
+    // Update image preview when image URL changes
+    if (name === 'imageUrl') {
+      setImagePreview(value);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      updateOrCreateProduct(isEditing, id, product)
+      await updateOrCreateProduct(isEditing, id, product);
       navigate('/admin/products');
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert('There was an error saving the product. Please try again.');
+    }
+  };
+
+  const handleCancel = () => {
+    if (window.confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
+      navigate('/admin/products');
     }
   };
 
   return (
-    <div>
+    <div className="admin-product-form-container">
       <h2>{isEditing ? 'Edit Product' : 'Add New Product'}</h2>
+      
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
@@ -84,18 +89,24 @@ useEffect(() => {
             value={product.name}
             onChange={handleChange}
             required
+            placeholder="Enter product name"
           />
         </div>
+        
         <div>
-          <label>Price</label>
+          <label>Price (£)</label>
           <input
             type="number"
             name="price"
             value={product.price}
             onChange={handleChange}
             required
+            min="0"
+            step="0.01"
+            placeholder="0.00"
           />
         </div>
+        
         <div>
           <label>Category</label>
           <select
@@ -112,6 +123,7 @@ useEffect(() => {
             ))}
           </select>
         </div>
+        
         <div>
           <label>Image URL</label>
           <input
@@ -119,10 +131,43 @@ useEffect(() => {
             name="imageUrl"
             value={product.imageUrl}
             onChange={handleChange}
+            placeholder="https://example.com/image.jpg"
           />
         </div>
-        <button type="submit">{isEditing ? 'Update Product' : 'Add Product'}</button>
+        
+        <div>
+          <label>Description</label>
+          <textarea
+            name="description"
+            value={product.description}
+            onChange={handleChange}
+            rows="4"
+            placeholder="Enter product description"
+          />
+        </div>
+        
+        {imagePreview && (
+          <div className="image-preview">
+            <p>Image Preview:</p>
+            <img src={imagePreview} alt="Preview" onError={(e) => {
+              e.target.style.display = 'none';
+            }} />
+          </div>
+        )}
+        
+        <button type="submit">
+          {isEditing ? 'Update Product' : 'Add Product'}
+        </button>
       </form>
+
+      <div className="navigation-buttons">
+        <button onClick={handleCancel} className="back-to-products-button">
+          Cancel
+        </button>
+        <Link to="/admin/products" className="back-to-products-button">
+          Back to Products
+        </Link>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useAppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import '../styles/AdminProductsPage.css';
+import '../styles/HeroStyles.css';
 
 const AdminProductsPage = () => {
   const { products, deleteProduct, loading, error } = useAppContext();
@@ -16,9 +17,23 @@ const AdminProductsPage = () => {
 
   return (
     <div className="admin-products-container">
-      <h2>Products</h2>
+      {/* Hero Section */}
+      <section className="admin-hero">
+        <div 
+          className="hero-background"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070')`
+          }}
+        >
+          <div className="hero-content">
+            <h1>Product Management</h1>
+            <p>Manage your beauty product inventory and catalog</p>
+          </div>
+        </div>
+      </section>
 
-      <div className="admin-controls">
+      <div className="admin-content">
+        <div className="admin-controls">
         <Link to="/admin/categories" className="categories-link">
           Manage Categories
         </Link>
@@ -77,6 +92,7 @@ const AdminProductsPage = () => {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 };
