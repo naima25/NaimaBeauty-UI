@@ -17,7 +17,12 @@ import AccountPage from './pages/AccountPage';
 import AboutUs from './pages/AboutUs';
 import Cart from './pages/Cart';
 import OurProducts from './pages/OurProducts';
-import MyOrders from './pages/MyOrders';  
+import MyOrders from './pages/MyOrders';
+import ContactUs from './pages/ContactUs';
+import FAQ from './pages/FAQ';
+import ShippingReturns from './pages/ShippingReturns';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';  
 
 // Import components for admin pages
 import AdminProductsPage from './pages/AdminProductsPage';  
@@ -49,6 +54,11 @@ const AppContent = () => {
               <Route path="/home" element={<Home />} />
               <Route path="/account" element={isAuthenticated ? <Navigate to="/our-products" replace /> : <AccountPage />} />
               <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/shipping" element={<ShippingReturns />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsConditions />} />
               <Route path="/our-products" element={<OurProducts />} />
               {/* A route for categories that redirects to the 'Our Products' page */}
               <Route path="/categories" element={<Navigate to="/our-products" replace />} />
