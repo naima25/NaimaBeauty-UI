@@ -10,6 +10,7 @@ const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isHeaderVisible, setHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState('up');
   const { cart, isAuthenticated, logout, getTotalItems, userRole } = useAppContext();
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,23 +30,20 @@ const Header = () => {
 
   const totalCartQuantity = cart?.cartItems?.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
-  // Control header visibility on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        // Scrolling down
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setHeaderVisible(false);
-      } else if (currentScrollY < lastScrollY || currentScrollY <= 50) {
-        // Scrolling up or at top
+      } else if (currentScrollY < lastScrollY) {
         setHeaderVisible(true);
       }
-
+      
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
