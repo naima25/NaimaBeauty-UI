@@ -1,184 +1,298 @@
-/* Add to your Cart.css */
-.create-order-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 10px;
-  }
-  
-  .create-order-button:hover {
-    background-color: #45a049;
-  }
-  
-  /* Create new Orders.css */
+/* Orders.css */
+
+/* Import the same elegant font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #D4AF37;
+  --light-gold: #F1E5AC;
+  --dark-gold: #B8860B;
+  --white: #FFFFFF;
+  --off-white: #F8F5F0;
+  --light-gray: #F5F5F5;
+  --dark-gray: #333333;
+  --text-color: #2C2C2C;
+}
+
+.orders-page {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
+  background-color: var(--white);
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.orders-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.orders-title:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 2px;
+  background-color: var(--gold);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Empty orders message */
+.orders-page > p {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 3rem;
+  color: #666;
+}
+
+/* Order container */
+.order {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.order:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Order header */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.order-header h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark-gray);
+}
+
+.order-header p {
+  color: #666;
+}
+
+.order-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.cancel-order-button {
+  background-color: transparent;
+  border: 1px solid #d9534f;
+  color: #d9534f;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cancel-order-button:hover {
+  background-color: #d9534f;
+  color: var(--white);
+}
+
+.order-total {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--dark-gray) !important;
+}
+
+/* Order items */
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.order-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid #f5f5f5;
+  border-radius: 5px;
+  background-color: var(--off-white);
+  position: relative;
+}
+
+.order-item-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.order-item-details {
+  flex: 1;
+}
+
+.order-item-details h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: var(--dark-gray);
+}
+
+.order-item-details p {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+/* Quantity display and edit */
+.quantity-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.quantity-display span {
+  font-weight: 600;
+}
+
+.edit-quantity-button {
+  background-color: transparent;
+  border: 1px solid var(--gold);
+  color: var(--dark-gray);
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-quantity-button:hover {
+  background-color: var(--gold);
+}
+
+.quantity-edit {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1rem 0;
+}
+
+.quantity-input {
+  width: 60px;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.save-quantity-button,
+.cancel-edit-button {
+  background-color: transparent;
+  border: 1px solid var(--gold);
+  color: var(--dark-gray);
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-quantity-button:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: var(--white);
+}
+
+.cancel-edit-button:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: var(--white);
+}
+
+.remove-order-item-button {
+  background-color: transparent;
+  border: 1px solid #d9534f;
+  color: #d9534f;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
+
+.remove-order-item-button:hover {
+  background-color: #d9534f;
+  color: var(--white);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .orders-page {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .orders-title {
-    text-align: center;
-    margin-bottom: 30px;
+    padding: 1rem;
   }
   
   .order {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
+    padding: 1.5rem;
   }
   
   .order-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    flex-direction: column;
+    gap: 1rem;
   }
   
-  .order-items {
-    display: grid;
-    gap: 15px;
+  .order-actions {
+    align-items: flex-start;
+    width: 100%;
   }
   
   .order-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex-direction: column;
+    padding: 1rem;
   }
   
   .order-item-image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    margin-right: 20px;
-  }
-  
-  .order-item-details {
-    flex-grow: 1;
-  }
-
-.order-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .cancel-order-button {
-    background-color: #ff44ab;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .cancel-order-button:hover {
-    background-color: #cc0000;
-  }
-  
-  .order-total {
-    font-weight: bold;
-    font-size: 1.1em;
+    width: 100%;
+    height: auto;
+    max-height: 250px;
   }
   
   .remove-order-item-button {
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    align-self: flex-start;
+    position: static;
+    margin-top: 1rem;
   }
   
-  .remove-order-item-button:hover {
-    background-color: #da0a91;
+  .orders-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .order {
+    padding: 1rem;
   }
   
-  .quantity-display {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .order-header h3 {
+    font-size: 1.5rem;
   }
   
-  .edit-quantity-button {
-    background-color: #2196F3;
-    color: white;
-    border: none;
-    padding: 3px 8px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  
-  .edit-quantity-button:hover {
-    background-color: #45a049;
+  .order-item-details h4 {
+    font-size: 1.3rem;
   }
   
   .quantity-edit {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 5px 0;
+    flex-wrap: wrap;
   }
-  
-  .quantity-input {
-    width: 50px;
-    padding: 3px;
-    text-align: center;
-  }
-  
-  .save-quantity-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 3px 8px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  
-  .save-quantity-button:hover {
-    background-color: #45a049;
-  }
-  
-  .cancel-edit-button {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 3px 8px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  
-  .cancel-edit-button:hover {
-    background-color: #d32f2f;
-  }
-  
-  .order-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    justify-content: space-between;
-    gap: 15px;
-  }
-  
-  .order-item-details {
-    flex-grow: 1;
-  }
+}

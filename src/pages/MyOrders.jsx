@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import '../styles/Orders.css';
+import '../styles/HeroStyles.css';
 
 const OrdersPage = () => {
   const { orders, loading, error, cancelOrder, updateOrderItemQuantity, removeOrderItem } = useAppContext();
@@ -27,9 +28,23 @@ const OrdersPage = () => {
 
   return (
     <div className="orders-page">
-      <h1 className="orders-title">Your Orders</h1>
+      {/* Hero Section */}
+      <section className="orders-hero">
+        <div 
+          className="hero-background"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=2070')`
+          }}
+        >
+          <div className="hero-content">
+            <h1>My Orders</h1>
+            <p>Track and manage your beauty product orders</p>
+          </div>
+        </div>
+      </section>
       
-      {orders?.length > 0 ? (
+      <div className="orders-content">
+        {orders?.length > 0 ? (
         <div>
           {orders?.map((order) => (
             <div key={order.id} className="order">
@@ -119,8 +134,9 @@ const OrdersPage = () => {
           ))}
         </div>
       ) : (
-        <p>You haven't placed any orders yet.</p>
-      )}
+          <p>You haven't placed any orders yet.</p>
+        )}
+      </div>
     </div>
   );
 };

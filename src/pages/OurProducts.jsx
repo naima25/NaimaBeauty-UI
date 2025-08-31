@@ -1,58 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';  
 import { useAppContext } from '../context/AppContext';
-import '../styles/OurProducts.css';  
-
-/*
-  OurProducts component:
-  - Displays a list of product categories with the option to filter products by category.
-  - Includes a "View All Products" button to reset the filter and show all products.
-  - Handles category selection and updates the display of filtered products accordingly.
-*/
-
+import '../styles/OurProducts.css';
+import '../styles/HeroStyles.css';  
 
 const OurProducts = () => {
-  const {categories, products, filteredProducts, setFilteredProducts, loading, error, getProductsByCategory} = useAppContext(); 
-  const [activeCategory, setActiveCategory] = useState(null); // State for active category
-  
+  const { categories, products, filteredProducts, setFilteredProducts, loading, error, getProductsByCategory } = useAppContext(); 
+  const [activeCategory, setActiveCategory] = useState(null);
+
   // Function to shuffle products randomly
-    const shuffleArray = (array) => {
-      return array.sort(() => Math.random() - 0.5); // Shuffle using random number generator
-    };
+  const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
 
   // useEffect to fetch products when the component mounts
   useEffect(() => {
-    // Set the filtered products to the shuffled array
-    setFilteredProducts(products);
-  }, [loading]);
-
+    if (products.length > 0) {
+      setFilteredProducts(shuffleArray([...products]));
+    }
+  }, [products, setFilteredProducts]);
 
   const handleCategoryClick = (categoryName) => {
     setActiveCategory(categoryName);
-  
-    // Fetch products based on the encoded category name
     if (categoryName) {
-      getProductsByCategory(categoryName)
+      getProductsByCategory(categoryName);
     }
   };
-  
 
   // Handle "View All Products" button click
   const viewAllProducts = () => {
-    setActiveCategory(null); // Reset active category
-    setFilteredProducts(products); // Reset to show all products
+    setActiveCategory(null);
+    setFilteredProducts(shuffleArray([...products]));
   };
 
-  // Render loading or error messages if needed
-  // if (loading.categories || loading.products) return <div>Loading...</div>;
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div className="loading-state">Loading...</div>;
+  if (error) return <div className="error-state">Error: {error}</div>;
 
   return (
     <div className="our-products-container">
+      {/* Hero Section */}
+      <section className="products-hero">
+        <div 
+          className="hero-background"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=2070')`
+          }}
+        >
+          <div className="hero-content">
+            <h1>Our Collection</h1>
+            <p>Discover our exquisite range of beauty products, carefully curated for your luxury experience</p>
+          </div>
+        </div>
+      </section>
+
       {/* "View Our Products" Button */}
       <div className="categories-header">
-        <button onClick={viewAllProducts}>View Our Products</button>
+        <button onClick={viewAllProducts}>View All Products</button>
       </div>
 
       {/* Category Buttons Row */}

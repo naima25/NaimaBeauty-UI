@@ -1,84 +1,169 @@
-/* AdminProductForm.css 
-This CSS file defines the styling for the "Admin Product Form" component, which is used to manage product details in the admin panel. 
-  The styles are designed to make the form visually appealing, user-friendly, and responsive.
- */
+/* AdminProductForm.css */
 
+/* Import the same elegant font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
-/* Form container */
-.product-form-container {
-    padding: 2rem;
-    margin-top: 1rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+:root {
+  --gold: #D4AF37;
+  --light-gold: #F1E5AC;
+  --dark-gold: #B8860B;
+  --white: #FFFFFF;
+  --off-white: #F8F5F0;
+  --light-gray: #F5F5F5;
+  --dark-gray: #333333;
+  --text-color: #2C2C2C;
+}
+
+.admin-product-form-container {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
+  background-color: var(--white);
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.admin-product-form-container h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.admin-product-form-container h2:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 2px;
+  background-color: var(--gold);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Form styling */
+.admin-product-form-container form {
+  background-color: var(--off-white);
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.admin-product-form-container form div {
+  margin-bottom: 1.5rem;
+}
+
+.admin-product-form-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--dark-gray);
+}
+
+.admin-product-form-container input,
+.admin-product-form-container select,
+.admin-product-form-container textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.admin-product-form-container input:focus,
+.admin-product-form-container select:focus,
+.admin-product-form-container textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.admin-product-form-container button[type="submit"] {
+  background-color: transparent;
+  border: 1px solid var(--dark-gray);
+  color: var(--dark-gray);
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.admin-product-form-container button[type="submit"]:hover {
+  background-color: var(--dark-gray);
+  color: var(--white);
+}
+
+/* Navigation buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.back-to-products-button,
+.back-to-categories-button {
+  background-color: transparent;
+  border: 1px solid var(--gold);
+  color: var(--dark-gray);
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.back-to-products-button:hover,
+.back-to-categories-button:hover {
+  background-color: var(--gold);
+}
+
+/* Image preview */
+.image-preview {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.image-preview img {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-product-form-container {
+    padding: 1rem;
   }
   
-  /* Form header */
-  h2 {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #852981;
-    margin-bottom: 1rem;
+  .admin-product-form-container form {
+    padding: 1.5rem;
+  }
+  
+  .admin-product-form-container h2 {
+    font-size: 2rem;
+  }
+  
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .back-to-products-button,
+  .back-to-categories-button {
     text-align: center;
   }
-  
-  /* Form input fields */
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  label {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    display: block;
-    font-size: 1rem;
-  }
-  
-  input,
-  select {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  input[type="number"] {
-    width: 100%;
-  }
-  
-  button.submit-button {
-    padding: 12px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    width: 100%;
-    transition: background-color 0.3s ease;
-  }
-  
-  button.submit-button:hover {
-    background-color: #f82dd6;
-  }
-  
-  /* Mobile responsiveness */
-  @media (max-width: 600px) {
-    .product-form-container {
-      padding: 1rem;
-    }
-  
-    .form-group {
-      margin-bottom: 1rem;
-    }
-  
-    button.submit-button {
-      width: 100%;
-    }
-  }
-  
+}

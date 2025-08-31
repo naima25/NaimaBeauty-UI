@@ -1,71 +1,68 @@
-// AdminCategoryForm.jsx
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom'; // Import Link and useNavigate
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import '../styles/AdminProductForm.css';
 import '../styles/AdminCategoryForm.css';
 
 const AdminCategoryForm = () => {
-
   const { id } = useParams(); 
   const navigate = useNavigate();
-
-   
-
-  const [category, setCategory] = useState({
-    name: '',
-  });
+  const [category, setCategory] = useState({ name: '' });
   const [isEditing, setIsEditing] = useState(false);
-
-  const {updateOrCreateCategory, getCategoryById} = useAppContext();
-
+  const { updateOrCreateCategory, getCategoryById } = useAppContext();
 
   useEffect(() => {
-  let isMounted = true; // Flag to track component mount status
+    let isMounted = true;
 
-  const fetchCategory = async () => {
-    if (id) {
-      setIsEditing(true);
-      try {
-        const categoryData = await getCategoryById(id);
-        if (isMounted) { // Only update state if component is still mounted
-          setCategory(categoryData);
+    const fetchCategory = async () => {
+      if (id) {
+        setIsEditing(true);
+        try {
+          const categoryData = await getCategoryById(id);
+          if (isMounted) {
+            setCategory(categoryData);
+          }
+        } catch (error) {
+          console.error("Failed to fetch category:", error);
         }
-      } catch (error) {
-        console.error("Failed to fetch category:", error);
-        // Handle error (e.g., show error message)
+      } else {
+        setIsEditing(false);
       }
-    } else {
-      setIsEditing(false);
-    }
-  };
+    };
 
-  fetchCategory();
+    fetchCategory();
 
-  return () => {
-    isMounted = false; // Cleanup function to prevent state updates after unmount
-  };
-}, [id]);
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCategory((prev) => ({ ...prev, [name]: value }));
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      updateOrCreateCategory(isEditing, id, category)
-      navigate('/admin/categories'); // After submission, navigate to categories page
+      await updateOrCreateCategory(isEditing, id, category);
+      navigate('/admin/categories');
     } catch (err) {
       console.error('Error submitting form:', err);
+      alert('There was an error saving the category. Please try again.');
+    }
+  };
+
+  const handleCancel = () => {
+    if (window.confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
+      navigate('/admin/categories');
     }
   };
 
   return (
     <div className="admin-category-form-container">
       <h2>{isEditing ? 'Edit Category' : 'Add New Category'}</h2>
+      
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
@@ -75,13 +72,19 @@ const AdminCategoryForm = () => {
             value={category.name}
             onChange={handleChange}
             required
+            placeholder="Enter category name"
           />
         </div>
-        <button type="submit">{isEditing ? 'Update Category' : 'Add Category'}</button>
+        
+        <button type="submit">
+          {isEditing ? 'Update Category' : 'Add Category'}
+        </button>
       </form>
 
-      {/* Back to Categories Button */}
       <div className="navigation-buttons">
+        <button onClick={handleCancel} className="back-to-categories-button">
+          Cancel
+        </button>
         <Link to="/admin/categories" className="back-to-categories-button">
           Back to Categories
         </Link>

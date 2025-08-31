@@ -1,69 +1,182 @@
-/* Push content below fixed navbar */
-.our-products-container {
-  margin-top: 100px; /* Adjust based on your navbar height */
-  padding: 1rem;
+/* OurProducts.css */
+
+/* Import the same elegant font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #D4AF37;
+  --light-gold: #F1E5AC;
+  --dark-gold: #B8860B;
+  --white: #FFFFFF;
+  --off-white: #F8F5F0;
+  --light-gray: #F5F5F5;
+  --dark-gray: #333333;
+  --text-color: #2C2C2C;
 }
 
-/* Categories Header Section */
-.categories-header {
+.our-products-container {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+/* Hero Section - matching home page style */
+.products-hero {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1780') center/cover no-repeat;
   display: flex;
+  align-items: center;
   justify-content: center;
+  text-align: center;
+  color: var(--white);
+  margin-bottom: 3rem;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.hero-content h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Categories Header */
+.categories-header {
+  text-align: center;
   margin-bottom: 2rem;
 }
 
 .categories-header button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background-color: #ff4096;
-  color: white;
-  border: none;
-  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  color: var(--dark-gray);
+  padding: 0.8rem 2rem;
+  border: 1px solid var(--dark-gray);
+  border-radius: 0;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: 0.3s ease;
 }
 
 .categories-header button:hover {
-  background-color: #fa00ddf0;
+  background-color: var(--dark-gray);
+  color: var(--white);
 }
 
 /* Category Buttons Row */
 .category-row {
   display: flex;
   justify-content: center;
-  gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
 }
 
 .category-button {
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  background-color: #e0e0e0;
-  color: #333333;
+  background-color: transparent;
+  border: 1px solid var(--gold);
+  color: var(--dark-gray);
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  font-weight: 500;
-  transition: 0.3s;
-  border: none;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .category-button:hover {
-  background-color: #fa00ddf0;
-  color: white;
+  background-color: var(--gold);
+  color: var(--dark-gray);
 }
 
 .category-button.active {
-  background-color: #fa00ddf0;
-  color: white;
+  background-color: var(--gold);
+  color: var(--dark-gray);
+  font-weight: 600;
 }
 
 /* Products Grid */
 .products-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 5rem;
 }
 
+/* Loading and Error States */
+.loading-state, .error-state {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+}
 
+.error-state {
+  color: #d9534f;
+}
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .products-hero {
+    height: 50vh;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content p {
+    font-size: 1rem;
+  }
+  
+  .category-row {
+    gap: 0.5rem;
+  }
+  
+  .category-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-hero {
+    height: 40vh;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

@@ -1,79 +1,140 @@
-/* Reset and base styling */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Calibri, sans-serif;
-  }
-  
-  /* AdminCategoryForm CSS */
+/* AdminCategoryForm.css */
+
+/* Import the same elegant font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #D4AF37;
+  --light-gold: #F1E5AC;
+  --dark-gold: #B8860B;
+  --white: #FFFFFF;
+  --off-white: #F8F5F0;
+  --light-gray: #F5F5F5;
+  --dark-gray: #333333;
+  --text-color: #2C2C2C;
+}
+
+.admin-category-form-container {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
+  background-color: var(--white);
+  min-height: 100vh;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.admin-category-form-container h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.admin-category-form-container h2:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 2px;
+  background-color: var(--gold);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Form styling */
+.admin-category-form-container form {
+  background-color: var(--off-white);
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.admin-category-form-container form div {
+  margin-bottom: 1.5rem;
+}
+
+.admin-category-form-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--dark-gray);
+}
+
+.admin-category-form-container input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.admin-category-form-container input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.admin-category-form-container button[type="submit"] {
+  background-color: transparent;
+  border: 1px solid var(--dark-gray);
+  color: var(--dark-gray);
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.admin-category-form-container button[type="submit"]:hover {
+  background-color: var(--dark-gray);
+  color: var(--white);
+}
+
+/* Navigation buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 2rem;
+}
+
+.back-to-categories-button {
+  background-color: transparent;
+  border: 1px solid var(--gold);
+  color: var(--dark-gray);
+  padding: 0.8rem 1.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.back-to-categories-button:hover {
+  background-color: var(--gold);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .admin-category-form-container {
-    padding: 2rem;
-    margin-top: 70px; /* Adjust this to avoid clash with the fixed navbar */
+    padding: 1rem;
   }
   
-  h2 {
-    text-align: left;  /* Aligns the title to the left */
-    font-size: 1.25rem;  /* Slightly smaller font size */
-    font-weight: 600;
-    margin-bottom: 0.5rem;  /* Adjust margin to place it lower */
+  .admin-category-form-container form {
+    padding: 1.5rem;
   }
   
-  /* Navigation Buttons Styling */
-  .navigation-buttons {
-    display: flex;
-    justify-content: space-between;  /* Space out the buttons */
-    margin-top: 1.5rem;
+  .admin-category-form-container h2 {
+    font-size: 2rem;
   }
-  
-  /* Back buttons styling */
-  .back-to-categories-button,
-  .back-to-products-button {
-    background: #852981; /* Matches the green color from the AdminProductsPage */
-    color: white;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: background-color 0.3s ease;  /* Smooth hover effect */
-  }
-  
-  /* Hover effects */
-  .back-to-categories-button:hover,
-  .back-to-products-button:hover {
-    background-color: #ffe748;  
-  }
-  
-  /* Focus effect for accessibility */
-  .back-to-categories-button:focus,
-  .back-to-products-button:focus {
-    outline: 2px solid #ffcc00; /* Yellow border on focus */
-  }
-  
-  /* Active button style when clicked */
-  .back-to-categories-button:active,
-  .back-to-products-button:active {
-    background-color: #388e3c;  /* Darker green when clicked */
-    transform: scale(0.98); /* Shrinks the button slightly */
-  }
-  
-  /* Base footer styling */
-  .footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #ffffff42;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    font-size: 14px;
-  }
-  
-  .footer p {
-    margin: 0;
-    line-height: 40px;
-    font-size: 0.7em;
-    color: #000000;
-  }
-  
+}
