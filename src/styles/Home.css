@@ -14,12 +14,6 @@
   --text-color: #2C2C2C;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .home-container {
   font-family: 'Montserrat', sans-serif;
   color: var(--text-color);

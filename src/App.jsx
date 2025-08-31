@@ -88,7 +88,7 @@ const AppContent = () => {
 
             </Routes>
           </main>
-          {/* <Footer /> */}
+          <Footer />
 
     </div>
   );

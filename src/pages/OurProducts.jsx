@@ -7,6 +7,7 @@ import '../styles/HeroStyles.css';
 const OurProducts = () => {
   const { categories, products, filteredProducts, setFilteredProducts, loading, error, getProductsByCategory } = useAppContext(); 
   const [activeCategory, setActiveCategory] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Function to shuffle products randomly
   const shuffleArray = (array) => {
@@ -30,7 +31,25 @@ const OurProducts = () => {
   // Handle "View All Products" button click
   const viewAllProducts = () => {
     setActiveCategory(null);
+    setSearchTerm('');
     setFilteredProducts(shuffleArray([...products]));
+  };
+
+  // Handle search functionality
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    setActiveCategory(null);
+    
+    if (!term.trim()) {
+      setFilteredProducts(shuffleArray([...products]));
+      return;
+    }
+    
+    const filtered = products.filter(product => 
+      product.name.toLowerCase().includes(term.toLowerCase()) ||
+      product.description?.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredProducts(filtered);
   };
 
   if (loading) return <div className="loading-state">Loading...</div>;
@@ -53,9 +72,18 @@ const OurProducts = () => {
         </div>
       </section>
 
-      {/* "View Our Products" Button */}
-      <div className="categories-header">
-        <button onClick={viewAllProducts}>View All Products</button>
+      {/* Search and Controls */}
+      <div className="products-controls">
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) => handleSearch(e.target.value)}
+            className="search-input"
+          />
+        </div>
+        <button onClick={viewAllProducts} className="view-all-btn">View All Products</button>
       </div>
 
       {/* Category Buttons Row */}
