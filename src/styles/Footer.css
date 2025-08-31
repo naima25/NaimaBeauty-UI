@@ -3,13 +3,9 @@
 .footer {
   background-color: #ffffff;
   color: #2C2C2C;
-  padding: 4rem 0 0;
+  padding: 4rem 0;
   box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
-  position: absolute; /* Changed from relative to absolute */
-  bottom: 0; /* Position at bottom */
-  left: 0;
   width: 100%;
-  height: var(--footer-height); /* Use the variable from App.css */
 }
 
 .footer-container {
@@ -238,7 +234,7 @@
 
 @media (max-width: 768px) {
   .footer {
-    padding: 3rem 0 0;
+    padding: 3rem 0;
   }
   
   .footer-container {
