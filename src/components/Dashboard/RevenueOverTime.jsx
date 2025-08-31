@@ -2,40 +2,50 @@
 
 import React, { useEffect, useState } from "react";
 import { FiDollarSign } from "react-icons/fi";
+import api from "../../services/api.config";
 import {
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
   CartesianGrid,
-  Line,
-  LineChart,
+  Area,
+  AreaChart,
 } from "recharts";
-import api from "../../services/api.config";
 
 export const RevenueOverTime = () => {
-  const [revenueData, setRevenueData] = useState([]);
+  const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [filter, setFilter] = useState("all"); // default filter
+  const [filter, setFilter] = useState("all"); // all, 7days, 30days
+  const [categoryFilter, setCategoryFilter] = useState("all");
 
+  // Fetch full data for selected time frame
   useEffect(() => {
-    const fetchRevenueData = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
+        const params = {};
+        if (filter === "7days") {
+          params.startDate = new Date(new Date().setDate(new Date().getDate() - 7)).toISOString();
+        } else if (filter === "30days") {
+          params.startDate = new Date(new Date().setDate(new Date().getDate() - 30)).toISOString();
+        }
 
-        const response = await api.get("/AdminAnalytics/revenue-overtime");
+        const response = await api.get("/AdminAnalytics/revenue-overtime", { params });
+        const formatted = response.data.map(item => ({ ...item, date: new Date(item.date) }));
+        setData(formatted);
 
-        // Format date to 'YYYY-MM-DD'
-        const formattedData = response.data.map((item) => ({
-          date: item.date.split("T")[0], // strip time part
-          revenue: item.totalRevenue,
-        }));
+        // Apply category filter client-side
+        if (categoryFilter === "all") {
+          setFilteredData(formatted);
+        } else {
+          const filtered = formatted.filter(d => d.categoryId?.toString() === categoryFilter);
+          setFilteredData(filtered);
+        }
 
-        setRevenueData(formattedData);
-        setFilteredData(formattedData); // initially show all
       } catch (err) {
         console.error(err);
         setError("Failed to load revenue data.");
@@ -44,101 +54,66 @@ export const RevenueOverTime = () => {
       }
     };
 
-    fetchRevenueData();
-  }, []);
+    fetchData();
+  }, [filter, categoryFilter]);
 
-  // Filter data whenever `filter` changes
-  useEffect(() => {
-    if (filter === "all") {
-      setFilteredData(revenueData);
-    } else {
-      const days = filter === "7days" ? 7 : 30;
-      const cutoff = new Date();
-      cutoff.setDate(cutoff.getDate() - days);
-      const filtered = revenueData.filter(
-        (d) => new Date(d.date) >= cutoff
-      );
-      setFilteredData(filtered);
-    }
-  }, [filter, revenueData]);
+  if (loading) return <p>Loading revenue data...</p>;
+  if (error) return <p className="text-danger">{error}</p>;
 
-  // Calculate custom Y-axis ticks rounded to nearest 100
-  const yTicks = () => {
-    if (filteredData.length === 0) return [];
-    const revenues = filteredData.map((d) => d.revenue);
-    const min = Math.min(...revenues);
-    const max = Math.max(...revenues);
-    const padding = (max - min) * 0.1;
-    const roundedMax = Math.ceil((max + padding) / 100) * 100;
-    const roundedMin = Math.floor(Math.max(0, min - padding) / 100) * 100;
-    const step = (roundedMax - roundedMin) / 5; // 5 ticks
-    return Array.from({ length: 6 }, (_, i) =>
-      Math.round(roundedMin + step * i)
-    );
-  };
-
-  if (loading) {
-    return (
-      <div className="border rounded p-3">
-        <div
-          style={{ height: "250px" }}
-          className="d-flex justify-content-center align-items-center"
-        >
-          <p>Loading revenue data...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="border rounded p-3">
-        <div
-          style={{ height: "250px" }}
-          className="d-flex justify-content-center align-items-center text-danger"
-        >
-          <p>{error}</p>
-        </div>
-      </div>
-    );
-  }
+  // Build unique category list from full data
+  const categories = Array.from(
+    new Set(data.map(d => JSON.stringify({ id: d.categoryId, name: d.categoryName })))
+  ).map(s => JSON.parse(s));
 
   return (
-    <div className="border rounded p-3" style={{ width: "460px" }}>
-      {/* Title centered */}
-      <h3 style={{ textAlign: "center", marginBottom: "1rem" }}>
+    <div className="border rounded p-3 h-100">
+      <h3 className="text-center mb-3">
         <FiDollarSign /> Revenue Over Time
       </h3>
 
-      {/* Filter dropdown */}
-      <div style={{ marginBottom: "1rem", textAlign: "center" }}>
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+      {/* Filters */}
+      <div className="d-flex justify-content-center gap-2 mb-3">
+        <select value={filter} onChange={e => setFilter(e.target.value)}>
           <option value="all">All Time</option>
           <option value="7days">Last 7 Days</option>
           <option value="30days">Last 30 Days</option>
         </select>
+
+        <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)}>
+          <option value="all">All Categories</option>
+          {categories.map(c => (
+            <option key={c.id} value={c.id}>{c.name}</option>
+          ))}
+        </select>
       </div>
 
-      {/* Chart */}
-      <div style={{ width: "100%", height: "250px" }}>
+      <div style={{ width: "100%", height: "350px" }}>
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            data={filteredData}
-            margin={{ top: 20, right: 20, left: 40, bottom: 20 }}
-          >
+          <AreaChart data={filteredData} margin={{ top: 20, right: 20, left: 20, bottom: 40 }}>
             <CartesianGrid stroke="#e4e4e7" />
-            <XAxis dataKey="date" />
-            <YAxis tickFormatter={(value) => `£${value}`} ticks={yTicks()} />
-            <Tooltip formatter={(value) => [`£${value}`, "Revenue"]} />
-            <Line
-              type="monotone"
-              dataKey="revenue"
-              stroke="#10b981"
-              strokeWidth={2}
-              dot={{ fill: "#10b981", r: 4 }}
-              activeDot={{ r: 6, fill: "#059669" }}
+            <XAxis 
+              dataKey="date"
+              tickFormatter={date => new Date(date).toLocaleDateString()} 
+              label={{ value: "Date", position: "insideBottom", offset: -10, fill: "#000" }}
+              tick={{ fill: "#000" }}
             />
-          </LineChart>
+            <YAxis 
+              label={{ value: "Revenue (£)", angle: -90, position: "insideLeft", offset: 10, fill: "#000", style: { textAnchor: "middle" } }}
+              tick={{ fill: "#000" }}
+            />
+            <Tooltip 
+              labelFormatter={date => new Date(date).toLocaleDateString()} 
+              formatter={value => [`£${value.toFixed(2)}`, "Revenue"]}
+            />
+            <Area
+              type="monotone"
+              dataKey="totalRevenue"
+              stroke="#16a34a"
+              fill="rgba(5, 150, 105, 0.3)"
+              strokeWidth={2}
+              activeDot={{ r: 6, fill: "#16a34a" }}
+            />
+          </AreaChart>
         </ResponsiveContainer>
       </div>
     </div>
