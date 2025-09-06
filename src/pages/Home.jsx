@@ -235,8 +235,14 @@ function HomePage() {
         <div className="newsletter-content">
           <h2>Join Our Inner Circle</h2>
           <p>Subscribe to receive exclusive offers, beauty tips, and early access to new collections</p>
-          <form className="newsletter-form">
-            <input type="email" placeholder="Your email address" />
+          <form 
+            className="newsletter-form"
+            action="https://buttondown.com/api/emails/embed-subscribe/naimabeauty"
+            method="post"
+            target="popupwindow"
+            onSubmit={() => window.open('https://buttondown.com/naimabeauty', 'popupwindow')}
+          >
+            <input type="email" name="email" placeholder="Your email address" required />
             <button type="submit">Subscribe</button>
           </form>
         </div>
