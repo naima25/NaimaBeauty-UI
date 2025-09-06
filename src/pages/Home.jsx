@@ -21,14 +21,14 @@ function HomePage() {
       title: "New Royal Collection",
       subtitle: "Crafted for those who appreciate the finer things in life",
       ctaText: "Explore Now",
-      ctaLink: "/new-collection"
+      ctaLink: "/our-products"
     },
     {
       image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=2070",
       title: "Exclusive Offers",
       subtitle: "Indulge in luxury with up to 30% off selected items",
       ctaText: "View Offers",
-      ctaLink: "/specials"
+      ctaLink: "/our-products"
     }
   ];
 
