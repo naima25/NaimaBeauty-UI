@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 import logo from '../assets/NaimaBeauty- final.png';
-import whiteLogo from '../assets/NaimaBeauty-white.png'; // Add your white logo image
+import whiteLogo from '../assets/NaimaBeauty-white.png';
 import { useAppContext } from "../context/AppContext"; 
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaChevronDown } from "react-icons/fa";
+import { FiMail, FiHelpCircle, FiTruck, FiShield, FiFileText } from "react-icons/fi";
 
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isHeaderVisible, setHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState('up');
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const { cart, isAuthenticated, logout, getTotalItems, userRole } = useAppContext();
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,6 +23,7 @@ const Header = () => {
 
   const closeMenu = () => {
     setMenuOpen(false);
+    setDropdownOpen(false);
   };
 
   const handleLogout = () => {
@@ -30,12 +33,28 @@ const Header = () => {
 
   const totalCartQuantity = cart?.cartItems?.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Control header visibility on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setHeaderVisible(false);
+        setDropdownOpen(false); // Close dropdown when scrolling down
       } else if (currentScrollY < lastScrollY) {
         setHeaderVisible(true);
       }
@@ -46,6 +65,27 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  // Close dropdown when route changes
+  useEffect(() => {
+    setDropdownOpen(false);
+  }, [location]);
+
+  // Handle dropdown hover behavior
+  const handleDropdownEnter = () => {
+    if (window.innerWidth > 768) {
+      setDropdownOpen(true);
+    }
+  };
+
+  const handleDropdownLeave = () => {
+    if (window.innerWidth > 768) {
+      // Add a small delay to prevent accidental closing
+      setTimeout(() => {
+        setDropdownOpen(false);
+      }, 300);
+    }
+  };
 
   return (
     <nav className={isHeaderVisible ? '' : 'header-hidden'}>
@@ -103,7 +143,51 @@ const Header = () => {
               About Us
             </Link>
           </li>
-
+          
+          {/* Enhanced Dropdown */}
+          <li 
+            className={`dropdown ${isDropdownOpen ? 'show' : ''}`}
+            ref={dropdownRef}
+            onMouseEnter={handleDropdownEnter}
+            onMouseLeave={handleDropdownLeave}
+          >
+            <span 
+              className="dropdown-toggle"
+              onClick={() => {
+                if (window.innerWidth <= 768) {
+                  setDropdownOpen(!isDropdownOpen);
+                }
+              }}
+            >
+              Support <FaChevronDown className="dropdown-icon" />
+            </span>
+            <div 
+              className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
+            >
+              <Link to="/contact" onClick={closeMenu}>
+                <FiMail className="dropdown-item-icon" />
+                Contact Us
+              </Link>
+              <Link to="/faq" onClick={closeMenu}>
+                <FiHelpCircle className="dropdown-item-icon" />
+                FAQ
+              </Link>
+              <Link to="/shipping" onClick={closeMenu}>
+                <FiTruck className="dropdown-item-icon" />
+                Shipping & Returns
+              </Link>
+              <Link to="/privacy" onClick={closeMenu}>
+                <FiShield className="dropdown-item-icon" />
+                Privacy Policy
+              </Link>
+              <Link to="/terms" onClick={closeMenu}>
+                <FiFileText className="dropdown-item-icon" />
+                Terms & Conditions
+              </Link>
+            </div>
+          </li>
           {/* User-specific Links - only visible to authenticated users with 'User' role */}
           {isAuthenticated && userRole === "User" && (
             <>
