@@ -26,6 +26,7 @@ const Footer = () => {
         <div className="footer-column">
           <h4>Quick Links</h4>
           <ul className="footer-links">
+            <li><Link to="/home">Home</Link></li>
             <li><Link to="/our-products">Our Products</Link></li>
             <li><Link to="/about-us">About Us</Link></li>
             <li><Link to="/account">My Account</Link></li>
@@ -67,8 +68,14 @@ const Footer = () => {
           {/* Newsletter Signup */}
           <div className="newsletter">
             <h5>Subscribe to Our Newsletter</h5>
-            <form className="newsletter-form">
-              <input type="email" placeholder="Your email address" />
+            <form 
+              className="newsletter-form"
+              action="https://buttondown.com/api/emails/embed-subscribe/naimabeauty"
+              method="post"
+              target="popupwindow"
+              onSubmit={() => window.open('https://buttondown.com/naimabeauty', 'popupwindow')}
+            >
+              <input type="email" name="email" placeholder="Your email address" required />
               <button type="submit">Subscribe</button>
             </form>
           </div>

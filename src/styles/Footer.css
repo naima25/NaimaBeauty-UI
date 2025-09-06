@@ -152,11 +152,13 @@
 /* Newsletter */
 .newsletter-form {
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   margin-top: 1rem;
+  width: 100%;
 }
 
 .newsletter-form input {
-  flex: 1;
   padding: 0.8rem 1rem;
   border: 1px solid #ddd;
   font-family: 'Montserrat', sans-serif;
@@ -164,10 +166,10 @@
 }
 
 .newsletter-form button {
-  padding: 0 1.5rem;
+  padding: 0.8rem 1.2rem;
   background-color: #D4AF37;
   color: white;
-  border: none;
+  border: 1px solid #D4AF37;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   cursor: pointer;

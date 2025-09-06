@@ -21,14 +21,14 @@ function HomePage() {
       title: "New Royal Collection",
       subtitle: "Crafted for those who appreciate the finer things in life",
       ctaText: "Explore Now",
-      ctaLink: "/new-collection"
+      ctaLink: "/our-products"
     },
     {
       image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=2070",
       title: "Exclusive Offers",
       subtitle: "Indulge in luxury with up to 30% off selected items",
       ctaText: "View Offers",
-      ctaLink: "/specials"
+      ctaLink: "/our-products"
     }
   ];
 
@@ -235,8 +235,14 @@ function HomePage() {
         <div className="newsletter-content">
           <h2>Join Our Inner Circle</h2>
           <p>Subscribe to receive exclusive offers, beauty tips, and early access to new collections</p>
-          <form className="newsletter-form">
-            <input type="email" placeholder="Your email address" />
+          <form 
+            className="newsletter-form"
+            action="https://buttondown.com/api/emails/embed-subscribe/naimabeauty"
+            method="post"
+            target="popupwindow"
+            onSubmit={() => window.open('https://buttondown.com/naimabeauty', 'popupwindow')}
+          >
+            <input type="email" name="email" placeholder="Your email address" required />
             <button type="submit">Subscribe</button>
           </form>
         </div>
