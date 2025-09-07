@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
-import '../styles/Account.css';
+// import '../styles/Account.css';
+import '../styles/account.css';
 import { FiArrowRight, FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiHome, FiArrowLeft } from "react-icons/fi";
 
 const AccountPage = () => {
