@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "../styles/Home.css";
 import { FiArrowRight, FiStar, FiHeart, FiAward, FiInstagram, FiFacebook } from "react-icons/fi";
 import { SiTiktok, SiX } from 'react-icons/si';
+
+
 
 function HomePage() {
 
@@ -177,7 +179,7 @@ function HomePage() {
               image: "https://media.johnlewiscontent.com/i/JohnLewis/239746700?fmt=auto&$background-off-white$&$rsp-pdp-port-640$",
               badge: "Limited Edition"
             }
-          ].map((product, index) => (
+        ].map((product, index) => (
             <div key={index} className="product-card">
               <div className="product-image">
                 <img src={product.image} alt={product.title} />
@@ -189,12 +191,12 @@ function HomePage() {
               <div className="product-info">
                 <h3>{product.title}</h3>
                 <div className="product-price">
-                  {new Intl.NumberFormat('en-GB', {
-                    style: 'currency',
-                    currency: 'GBP',
-                  }).format(parseFloat(product.price))}
+                  {new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(parseFloat(product.price))}
                 </div>
-                <button className="add-to-cart-btn">Add to Cart</button>
+                {/* Updated Add to Cart button to redirect */}
+                <button className="add-to-cart-btn" onClick={goToAccount}>
+                  Add to Cart
+                </button>
               </div>
             </div>
           ))}

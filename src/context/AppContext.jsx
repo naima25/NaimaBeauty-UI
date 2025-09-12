@@ -2,11 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import api from '../services/api.config';
 import { jwtDecode } from 'jwt-decode';
 
-
-
-//Responsible for storing data and allowing different components in the application to access that data 
-
-
+// Responsible for storing data and allowing different components in the application to access that data
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
@@ -14,7 +10,6 @@ export const AppProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [userRole, setUserRole] = useState(null);
   const [userId, setUserId] = useState(null);
-
   // refresh version
   const [refresh, setRefresh] = useState(0)
 
@@ -34,10 +29,12 @@ export const AppProvider = ({ children }) => {
       try {
         setLoading(true);
         console.log("before fetching products: ")
+
         // Fetch products
         const productsResponse = await api.get('/product');
         setProducts(productsResponse.data);
         console.log("after fetching products: ", productsResponse)
+
         // Get categories
         const categoriesResponse = await api.get('/category');
         setCategories(categoriesResponse.data);
@@ -45,18 +42,19 @@ export const AppProvider = ({ children }) => {
         console.log(productsResponse);
         console.log("before: ");
         console.log("token: ", token)
+
         // Fetch user data if authenticated
         if (token) {
           const decodedToken = jwtDecode(token);
           console.log("decodedToken: ", decodedToken);
-          setUserRole(decodedToken.role === "Admin" ? "Admin" : "User");
 
+          setUserRole(decodedToken.role === "Admin" ? "Admin" : "User");
           const userId = decodedToken.userId;
           console.log("userId: ", userId);
           setUserId(userId);
+          console.log("myuserid: ", userId);
 
-          console.log("myuserid: ",userId); // confirm userId is fine
-
+          // confirm userId is fine
           const fetchCart = api.get(`/cart?customerId=${userId}`)
             .then(res => {
               console.log("cart response: ", res)
@@ -92,26 +90,26 @@ export const AppProvider = ({ children }) => {
         setLoading(false);
       }
     };
+
     fetchData();
+
     console.log("after fetching data: ")
     console.log(products);
     console.log(cart)
     console.log(orders)
+
   }, [token, refresh]);
 
   // Use this function to trigger a refresh.
   const triggerRefresh = () => setRefresh(prev => prev + 1);
 
   // Auth functions
-
   const login = async (email, password) => {
     try {
       setLoading(true);
       setError(null);
       const response = await api.post('/account/login', { email, password });
-
       if (!response.data.token) throw new Error('No token received');
-
       const { token: newToken } = response.data;
       localStorage.setItem('token', newToken);
       setToken(newToken);
@@ -126,17 +124,14 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-    const register = async (email, password) => {
+  const register = async (email, password) => {
     try {
       setLoading(true);
       setError(null);
-      console.log("Email and password: ", {email, password})
-      // const response = await api.post('/account/register', {email, password });
+      console.log("Email and password: ", { email, password })
       const response = await api.post('/account/register', { Email: email, Password: password });
       console.log("response: ", response)
-
       if (!response.data.token) throw new Error('No token received');
-
       const { token: newToken } = response.data;
       localStorage.setItem('token', newToken);
       setToken(newToken);
@@ -757,3 +752,4 @@ const fetchCategory = async () => {
 };
 
 export const useAppContext = () => useContext(AppContext);
+
