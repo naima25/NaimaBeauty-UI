@@ -57,13 +57,26 @@ export const RevenueOverTime = () => {
     fetchData();
   }, [filter, categoryFilter]);
 
-  if (loading) return <p>Loading revenue data...</p>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Loading revenue data...</p>
+    </div>
+  );
   if (error) return <p className="text-danger">{error}</p>;
 
   // Build unique category list from full data
   const categories = Array.from(
-    new Set(data.map(d => JSON.stringify({ id: d.categoryId, name: d.categoryName })))
-  ).map(s => JSON.parse(s));
+    data
+      .filter(d => d.categoryId != null)
+      .reduce((map, d) => {
+        if (!map.has(d.categoryId)) {
+          map.set(d.categoryId, { id: d.categoryId, name: d.categoryName });
+        }
+        return map;
+      }, new Map())
+      .values()
+  );
 
   return (
     <div className="border rounded p-3 h-100">

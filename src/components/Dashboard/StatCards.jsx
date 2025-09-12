@@ -45,7 +45,12 @@ export const StatCards = () => {
     fetchAnalytics();
   }, []);
 
-  if (loading) return <p>Loading stats...</p>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Loading stats...</p>
+    </div>
+  );
 
   return (
     <div className="row g-3">

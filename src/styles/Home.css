@@ -84,10 +84,10 @@ h1, h2, h3, h4 {
 .cta-button {
   display: inline-flex;
   align-items: center;
-  background-color: transparent;
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--dark-gray);
   padding: 1rem 2.5rem;
-  border: 2px solid var(--gold);
+  border: 2px solid var(--white);
   border-radius: 0;
   text-decoration: none;
   font-weight: 500;
@@ -100,6 +100,7 @@ h1, h2, h3, h4 {
 .cta-button:hover {
   background-color: var(--gold);
   color: var(--dark-gray);
+  border-color: var(--gold);
 }
 
 .cta-arrow {

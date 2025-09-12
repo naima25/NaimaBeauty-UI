@@ -201,16 +201,25 @@ export const OrdersOverTime = () => {
     }
   }, [categoryFilter, ordersData]);
 
-  if (loading) return <p>Loading orders data...</p>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Loading orders data...</p>
+    </div>
+  );
   if (error) return <p className="text-danger">{error}</p>;
 
   const categories = Array.from(
-    new Set(
-      ordersData
-        .filter(d => d.categoryId != null)
-        .map(d => JSON.stringify({ id: d.categoryId, name: d.categoryName }))
-    )
-  ).map(s => JSON.parse(s));
+    ordersData
+      .filter(d => d.categoryId != null)
+      .reduce((map, d) => {
+        if (!map.has(d.categoryId)) {
+          map.set(d.categoryId, { id: d.categoryId, name: d.categoryName });
+        }
+        return map;
+      }, new Map())
+      .values()
+  );
 
   return (
     <div className="border rounded p-3 h-100">

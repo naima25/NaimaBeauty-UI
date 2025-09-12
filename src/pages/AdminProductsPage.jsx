@@ -12,7 +12,12 @@ const AdminProductsPage = () => {
     }
   };
 
-  if (loading) return <div>Loading products...</div>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Loading products...</p>
+    </div>
+  );
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -22,7 +27,7 @@ const AdminProductsPage = () => {
         <div 
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070')`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1780')`
           }}
         >
           <div className="hero-content">

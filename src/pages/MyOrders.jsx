@@ -8,7 +8,12 @@ const OrdersPage = () => {
   const [editingItem, setEditingItem] = useState(null);
   const [newQuantity, setNewQuantity] = useState(1);
 
-  if (loading) return <div>Loading your orders...</div>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Loading your orders...</p>
+    </div>
+  );
   if (error) return <div>Error: {error}</div>;
 
   // Format price in GBP
@@ -33,7 +38,7 @@ const OrdersPage = () => {
         <div 
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=2070')`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=2070')`
           }}
         >
           <div className="hero-content">

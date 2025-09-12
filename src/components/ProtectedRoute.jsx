@@ -5,10 +5,19 @@ const ProtectedRoute = ({ role, element, fallback = '/our-products' }) => {
   const { userRole, loading, isAuthenticated } = useAppContext();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading...</p>
+      </div>
+    );
   }
 
-  if (userRole === role && isAuthenticated) {
+  if (!isAuthenticated) {
+    return <Navigate to="/account" replace />;
+  }
+
+  if (userRole === role) {
     return element;
   }
 

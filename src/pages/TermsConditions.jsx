@@ -9,7 +9,7 @@ const TermsConditions = () => {
         <div 
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1780')`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887')`
           }}
         >
           <div className="hero-content">

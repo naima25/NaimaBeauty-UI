@@ -19,10 +19,24 @@ export const AppProvider = ({ children }) => {
   const [categories, setCategories] = useState([])
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const isAuthenticated = !!token;
+
+  // Initialize auth state from token on mount
+  useEffect(() => {
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        setUserRole(decodedToken.role === "Admin" ? "Admin" : "User");
+        setUserId(decodedToken.userId);
+      } catch (error) {
+        console.error('Invalid token:', error);
+        logout();
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

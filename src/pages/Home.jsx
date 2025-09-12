@@ -194,9 +194,9 @@ function HomePage() {
                   {new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(parseFloat(product.price))}
                 </div>
                 {/* Updated Add to Cart button to redirect */}
-                <button className="add-to-cart-btn" onClick={goToAccount}>
-                  Add to Cart
-                </button>
+                {/* <button className="add-to-cart-btn" onClick={}> */}
+                  {/* Add to Cart
+                </button> */}
               </div>
             </div>
           ))}

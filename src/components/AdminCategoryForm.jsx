@@ -24,6 +24,7 @@ const AdminCategoryForm = () => {
           }
         } catch (error) {
           console.error("Failed to fetch category:", error);
+          alert('Failed to load category data. Please try again.');
         }
       } else {
         setIsEditing(false);

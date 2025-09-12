@@ -97,6 +97,9 @@ const AppContent = () => {
             path="/admin/categories/edit/:id"
             element={<ProtectedRoute role="Admin" element={<AdminCategoryForm />} />}
           />
+          
+          {/* Catch-all route for unmatched paths */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <Footer />

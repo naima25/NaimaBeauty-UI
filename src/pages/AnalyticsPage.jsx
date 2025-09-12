@@ -260,18 +260,29 @@
 
 import React from "react";
 import { Dashboard } from "../components/Dashboard/Dashboard";
+import '../styles/HeroStyles.css';
 
 const AnalyticsPage = () => {
   return (
-    <div
-      style={{
-        padding: "2rem",     // general page padding
-        paddingTop: "6rem",  // space from header
-        backgroundColor: "#f0f0f0",
-        minHeight: "100vh",
-      }}
-    >
-      <Dashboard />
+    <div className="analytics-page">
+      {/* Hero Section */}
+      <section className="analytics-hero">
+        <div 
+          className="hero-background"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015')`
+          }}
+        >
+          <div className="hero-content">
+            <h1>Analytics Dashboard</h1>
+            <p>Monitor your business performance and key metrics</p>
+          </div>
+        </div>
+      </section>
+
+      <div style={{ padding: "2rem", backgroundColor: "#f0f0f0" }}>
+        <Dashboard />
+      </div>
     </div>
   );
 };

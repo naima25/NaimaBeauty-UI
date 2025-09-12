@@ -23,7 +23,12 @@ const AdminCategoriesPage = () => {
     }
   };
 
-  if (loading) return <div>Loading categories...</div>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Loading categories...</p>
+    </div>
+  );
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -33,7 +38,7 @@ const AdminCategoriesPage = () => {
         <div 
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=2070')`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1887')`
           }}
         >
           <div className="hero-content">

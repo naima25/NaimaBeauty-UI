@@ -14,7 +14,12 @@ const CartPage = () => {
     createOrder,
   } = useAppContext();
 
-  if (loading) return <div>Loading your cart...</div>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Loading your cart...</p>
+    </div>
+  );
   if (error) return <div>Error: {error}</div>;
 
   const formatPrice = (price) => {
@@ -59,7 +64,7 @@ const CartPage = () => {
         <div 
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=2070')`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070')`
           }}
         >
           <div className="hero-content">

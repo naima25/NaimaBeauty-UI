@@ -52,7 +52,12 @@ const OurProducts = () => {
     setFilteredProducts(filtered);
   };
 
-  if (loading) return <div className="loading-state">Loading...</div>;
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Loading products...</p>
+    </div>
+  );
   if (error) return <div className="error-state">Error: {error}</div>;
 
   return (
@@ -62,7 +67,7 @@ const OurProducts = () => {
         <div 
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=2070')`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1780')`
           }}
         >
           <div className="hero-content">
