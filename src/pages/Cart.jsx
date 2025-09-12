@@ -64,7 +64,7 @@ const CartPage = () => {
         <div 
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070')`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1780')`
           }}
         >
           <div className="hero-content">

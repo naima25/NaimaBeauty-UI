@@ -38,7 +38,7 @@ const OrdersPage = () => {
         <div 
           className="hero-background"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=2070')`
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1780')`
           }}
         >
           <div className="hero-content">
