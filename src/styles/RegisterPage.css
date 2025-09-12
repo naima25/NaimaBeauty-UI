@@ -173,3 +173,21 @@
     padding: 12px;
   }
 }
+/* Password validation styles */
+.password-requirements {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.password-requirements .valid {
+  color: #10b981;
+}
+
+.password-requirements .invalid {
+  color: #ef4444;
+}
+
+.register-submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

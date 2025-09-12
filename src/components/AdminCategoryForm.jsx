@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import '../styles/AdminProductForm.css';
 import '../styles/AdminCategoryForm.css';
+import '../styles/HeroStyles.css';
 
 const AdminCategoryForm = () => {
   const { id } = useParams(); 
@@ -61,8 +62,23 @@ const AdminCategoryForm = () => {
   };
 
   return (
-    <div className="admin-category-form-container">
-      <h2>{isEditing ? 'Edit Category' : 'Add New Category'}</h2>
+    <div className="admin-category-form-page">
+      {/* Hero Section */}
+      <section className="admin-hero">
+        <div 
+          className="hero-background"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1887')`
+          }}
+        >
+          <div className="hero-content">
+            <h1>{isEditing ? 'Edit Category' : 'Add New Category'}</h1>
+            <p>{isEditing ? 'Update category information' : 'Create a new product category'}</p>
+          </div>
+        </div>
+      </section>
+
+      <div className="admin-category-form-container">
       
       <form onSubmit={handleSubmit}>
         <div>
@@ -90,6 +106,7 @@ const AdminCategoryForm = () => {
           Back to Categories
         </Link>
       </div>
+    </div>
     </div>
   );
 };

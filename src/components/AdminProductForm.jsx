@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import '../styles/AdminProductForm.css'; 
+import '../styles/AdminProductForm.css';
+import '../styles/HeroStyles.css';
 
 const AdminProductForm = () => {
   const { id } = useParams();
@@ -77,8 +78,23 @@ const AdminProductForm = () => {
   };
 
   return (
-    <div className="admin-product-form-container">
-      <h2>{isEditing ? 'Edit Product' : 'Add New Product'}</h2>
+    <div className="admin-product-form-page">
+      {/* Hero Section */}
+      <section className="admin-hero">
+        <div 
+          className="hero-background"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1780')`
+          }}
+        >
+          <div className="hero-content">
+            <h1>{isEditing ? 'Edit Product' : 'Add New Product'}</h1>
+            <p>{isEditing ? 'Update product information and details' : 'Create a new product for your catalog'}</p>
+          </div>
+        </div>
+      </section>
+
+      <div className="admin-product-form-container">
       
       <form onSubmit={handleSubmit}>
         <div>
@@ -168,6 +184,7 @@ const AdminProductForm = () => {
           Back to Products
         </Link>
       </div>
+    </div>
     </div>
   );
 };
